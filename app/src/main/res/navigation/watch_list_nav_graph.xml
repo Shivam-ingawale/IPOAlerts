@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/watch_list_nav_graph"
+    app:startDestination="@id/watchListFragment">
+
+    <fragment
+        android:id="@+id/watchListFragment"
+        android:name="com.lasteyestudios.ipoalerts.tabs.watchlist.WatchListFragment"
+        android:label="fragment_connect"
+        tools:layout="@layout/fragment_watch_list" />
+</navigation>

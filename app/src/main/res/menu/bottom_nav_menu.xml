@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/current_nav_graph"
+        android:title="@string/current_ipos"
+        android:icon="@drawable/ic_current" />
+    <item
+        android:id="@+id/listed_nav_graph"
+        android:title="@string/listed_ipos"
+        android:icon="@drawable/ic_listed" />
+    <item
+        android:id="@+id/watch_list_nav_graph"
+        android:title="@string/watch_list"
+        android:icon="@drawable/ic_watch_list"/>
+</menu>
