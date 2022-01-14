@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lasteyestudios.ipoalerts.databinding.FragmentCurrentBinding
-import com.lasteyestudios.ipoalerts.utils.LOG_TAG
+import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 
 class CurrentFragment : Fragment() {
 
@@ -29,7 +29,7 @@ class CurrentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.hey.setOnClickListener {
-            Log.d(LOG_TAG, "current fragment -> button clicked")
+            Log.d(IPO_LOG_TAG, "current fragment -> button clicked")
             currentViewModel.loadData()
         }
 //        viewLifecycleOwner.lifecycleScope.launch {

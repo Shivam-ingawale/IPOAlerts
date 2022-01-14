@@ -1,6 +1,6 @@
-package com.lasteyestudios.ipoalerts.data.models.growipolisting
+package com.lasteyestudios.ipoalerts.data.models.ipolistingmodel
 
-data class GrowIPOListing(
+data class IPOListingModel(
     val ACTIVE: List<Company>,
     val CLOSED: List<Company>,
     val LISTED: List<Company>,

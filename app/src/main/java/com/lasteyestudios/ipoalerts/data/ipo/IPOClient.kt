@@ -1,7 +1,6 @@
 package com.lasteyestudios.ipoalerts.data.ipo
 
 import android.util.Log
-import com.google.gson.JsonArray
 import com.lasteyestudios.ipoalerts.data.ipo.SearchIPOAllotments.APIMessageSearchAllotments
 import com.lasteyestudios.ipoalerts.data.ipo.SearchIPOAllotments.SearchAllotments
 import com.lasteyestudios.ipoalerts.data.ipo.common.RetrofitHelper
@@ -9,8 +8,11 @@ import com.lasteyestudios.ipoalerts.data.ipo.common.Transformer
 import com.lasteyestudios.ipoalerts.data.ipo.ipoAllotments.IPOAllotments
 import com.lasteyestudios.ipoalerts.data.ipo.ipoCompanyListing.IPOCompanyListings
 import com.lasteyestudios.ipoalerts.data.ipo.ipoDetails.IPOCompanyDetails
+import com.lasteyestudios.ipoalerts.data.models.AvailableAllotmentModel
 import com.lasteyestudios.ipoalerts.data.models.MediaResponse
-import com.lasteyestudios.ipoalerts.utils.LOG_TAG
+import com.lasteyestudios.ipoalerts.data.models.ipodetailsmodel.IPODetailsModel
+import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.IPOListingModel
+import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 
 
 class IPOClient {
@@ -31,17 +33,16 @@ class IPOClient {
         }
     }
 
-    suspend fun getIPOAllotments(): String? {
+    suspend fun getAvailableIPOAllotmentsData(): List<AvailableAllotmentModel>? {
 
-        Log.d(LOG_TAG, "client -> start")
+        Log.d(IPO_LOG_TAG, "client -> start")
 
         val ipoAllotmentsApi = RetrofitHelper(urlEndPointAllotments).getInstance()
             .create(IPOAllotments::class.java)
         try {
             val res = ipoAllotmentsApi.getIPOAllotments()
-            Log.d(LOG_TAG, "getIPOAllotments res -> ${res.toString()}")
-            return res.toString()
-//            return transformer.genericFeedData(res["payload"].asJsonObject["d"] as JsonArray)
+            Log.d(IPO_LOG_TAG, "getIPOAllotments res -> ${res.toString()}")
+            return transformer.getAvailableIPOAllotmentsData(res["d"].asString)
         } catch (e: Exception) {
             Log.d("TAG", "error while getIPOAllotments -> " + e.message)
         }
@@ -81,14 +82,14 @@ class IPOClient {
             message = message
         )
         try {
-            return transformer.profileFeedData(res["payload"].asJsonObject["d"] as JsonArray)
+//            return transformer.profileFeedData(res["payload"].asJsonObject["d"] as JsonArray)
         } catch (e: Exception) {
             Log.d("tag", "error: $e")
         }
         return null
     }
 
-    suspend fun getIPOCompanyListings(): String? {
+    suspend fun getIPOCompanyListings(): IPOListingModel? {
         val ipoCompanyListings =
             RetrofitHelper(urlEndPointIPOCompanyListings).getInstance()
                 .create(IPOCompanyListings::class.java)
@@ -103,14 +104,14 @@ class IPOClient {
         return null
     }
 
-    suspend fun getIPOCompanyDetails(searchId:String): String? {
+    suspend fun getIPOCompanyDetails(searchId:String): IPODetailsModel? {
         val ipoCompanyListings =
             RetrofitHelper(urlEndPointIPOCompanyDetails).getInstance()
                 .create(IPOCompanyDetails::class.java)
 
         val res = ipoCompanyListings.getIPOCompanyDetails(searchId = searchId)
         try {
-            return transformer.genericFeedData(res["payload"].asJsonObject["data"].asJsonObject["postCards"] as JsonArray).toString()
+            return transformer.growIPODetailsToDetails(res)
         } catch (e: Exception) {
             Log.d("tag", "error: $e")
         }

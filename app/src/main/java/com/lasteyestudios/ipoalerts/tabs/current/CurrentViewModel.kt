@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lasteyestudios.ipoalerts.data.models.Response
 import com.lasteyestudios.ipoalerts.repository.NetworkRepository
-import com.lasteyestudios.ipoalerts.utils.LOG_TAG
+import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -19,21 +19,24 @@ class CurrentViewModel : ViewModel() {
     val currentIPOs: LiveData<List<String>> get() = _currentIPOs
 
     fun loadData() {
-        Log.d(LOG_TAG, "CurrentViewModel -> start")
+        Log.d(IPO_LOG_TAG, "CurrentViewModel -> start")
 //        viewModelScope.launch {
 //            withContext(Dispatchers.IO) {
 //                  _currentIPOs.postValue()
 //            }
 //        }
         viewModelScope.launch {
-            networkRepository.getIPOCompanyListings("lic-ipo").collect(){response->
+            networkRepository.getAvailableIPOAllotmentsData().collect(){response->
                 when (response) {
-                    Response.Loading -> Log.d(LOG_TAG, "load: profile Loading")
-                    Response.Error -> Log.d(LOG_TAG, "load: profile Error")
+                    Response.Loading -> Log.d(IPO_LOG_TAG, "load: profile Loading")
+                    Response.Error -> Log.d(IPO_LOG_TAG, "load: profile Error")
                     is Response.Success -> {
                         if (response.data != null) {
                             val data = response.data
-                            Log.d(LOG_TAG, "load: profile Success")
+                            Log.d(IPO_LOG_TAG, "load: profile Success with data -> $data")
+//                            for (i  in 0 until  data.UPCOMING.size){
+//                                Log.d(IPO_LOG_TAG, "data got ${data.UPCOMING[i].logoUrl}.")
+//                            }
                             _currentIPOs.postValue(listOf(data.toString()))
                         }
                     }
