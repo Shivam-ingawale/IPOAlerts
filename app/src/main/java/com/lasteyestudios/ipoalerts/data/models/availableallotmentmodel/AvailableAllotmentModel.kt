@@ -1,4 +1,4 @@
-package com.lasteyestudios.ipoalerts.data.models
+package com.lasteyestudios.ipoalerts.data.models.availableallotmentmodel
 
 data class AvailableAllotmentModel(
 val company_id: String?,

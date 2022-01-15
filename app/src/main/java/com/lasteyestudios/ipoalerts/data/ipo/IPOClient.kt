@@ -8,10 +8,10 @@ import com.lasteyestudios.ipoalerts.data.ipo.common.Transformer
 import com.lasteyestudios.ipoalerts.data.ipo.ipoAllotments.IPOAllotments
 import com.lasteyestudios.ipoalerts.data.ipo.ipoCompanyListing.IPOCompanyListings
 import com.lasteyestudios.ipoalerts.data.ipo.ipoDetails.IPOCompanyDetails
-import com.lasteyestudios.ipoalerts.data.models.AvailableAllotmentModel
-import com.lasteyestudios.ipoalerts.data.models.MediaResponse
+import com.lasteyestudios.ipoalerts.data.models.availableallotmentmodel.AvailableAllotmentModel
 import com.lasteyestudios.ipoalerts.data.models.ipodetailsmodel.IPODetailsModel
 import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.IPOListingModel
+import com.lasteyestudios.ipoalerts.data.models.searchallotmentresultmodel.SearchAllotmentResultModel
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 
 
@@ -70,7 +70,7 @@ class IPOClient {
 //        return null
 //    }
 
-    suspend fun getSearchAllotmentsResults(companyId: String, keyWord: String, userDoc: String): MediaResponse? {
+    suspend fun getSearchAllotmentsResults(companyId: String, keyWord: String, userDoc: String): SearchAllotmentResultModel? {
         val searchAllotments = RetrofitHelper(urlEndPointAllotments).getInstance()
             .create(SearchAllotments::class.java)
         val message = APIMessageSearchAllotments(
@@ -82,7 +82,8 @@ class IPOClient {
             message = message
         )
         try {
-//            return transformer.profileFeedData(res["payload"].asJsonObject["d"] as JsonArray)
+            Log.d(IPO_LOG_TAG, "getSearchAllotmentsResults res -> ${res.toString()}")
+            return transformer.searchAllotmentResults(res.toString())
         } catch (e: Exception) {
             Log.d("tag", "error: $e")
         }

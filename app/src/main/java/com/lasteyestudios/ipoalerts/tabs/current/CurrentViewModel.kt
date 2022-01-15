@@ -26,7 +26,7 @@ class CurrentViewModel : ViewModel() {
 //            }
 //        }
         viewModelScope.launch {
-            networkRepository.getAvailableIPOAllotmentsData().collect(){response->
+            networkRepository.getSearchAllotmentsResults(companyId = "11594", userDoc = "81919771", keyWord = "APPLNO").collect(){ response->
                 when (response) {
                     Response.Loading -> Log.d(IPO_LOG_TAG, "load: profile Loading")
                     Response.Error -> Log.d(IPO_LOG_TAG, "load: profile Error")

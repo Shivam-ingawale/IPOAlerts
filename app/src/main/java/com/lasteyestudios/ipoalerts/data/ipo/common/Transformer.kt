@@ -3,10 +3,11 @@ package com.lasteyestudios.ipoalerts.data.ipo.common
 import android.util.Log
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.lasteyestudios.ipoalerts.data.models.AvailableAllotmentModel
+import com.lasteyestudios.ipoalerts.data.models.availableallotmentmodel.AvailableAllotmentModel
 import com.lasteyestudios.ipoalerts.data.models.ipodetailsmodel.*
 import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.Company
 import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.IPOListingModel
+import com.lasteyestudios.ipoalerts.data.models.searchallotmentresultmodel.SearchAllotmentResultModel
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 import com.lasteyestudios.ipoalerts.utils.LAST_TO_LAST_TO_LAST_YEAR
 import com.lasteyestudios.ipoalerts.utils.LAST_TO_LAST_YEAR
@@ -25,322 +26,12 @@ class Transformer {
         return (i)
     }
 
-    /*
-    * Specific Transformers
-//    * */
-//    fun genericFeedData(d: JsonArray): String? {
-//        val listMedia = emptyList<com.lasteyestudios.ipoalerts.data.models.Media>()
-//        val list2 = listMedia.toMutableList()
-//        try {
-//            for (i in 0 until d.size()) {
-//                val jsonElement = d[i] as JsonObject
-//                val widthString = objToString(jsonElement["w"])
-//                val heightString = objToString(jsonElement["h"])
-//                val authorJson = jsonElement["ath"] as JsonObject
-//                val basePlatformNew =
-//                    com.lasteyestudios.ipoalerts.data.models.BasePlatform(
-//                        name = "moj",
-//                        mediaTypes = objToString(jsonElement["t"])
-//                    )
-//                val audioJson = jsonElement["audioMeta"] as JsonObject
-//                val media = com.lasteyestudios.ipoalerts.data.models.Media(
-//                    id = objToString(jsonElement["a"]),
-//                    basePlatform = basePlatformNew,
-//                    contentType = objToString(jsonElement["t"]),
-//                    videos = listOf(
-//                        com.lasteyestudios.ipoalerts.data.models.MediaCandidate(
-//                            url = objToString(jsonElement["attributedVideoUrl"]),
-//                            height = heightString,
-//                            width = widthString
-//                        )
-//                    ),
-//                    audio = com.lasteyestudios.ipoalerts.data.models.MediaAudio(
-//                        id = objToString(audioJson["audioId"]),
-//                        artist = objToString(audioJson["audioText"]),
-//                        artworkUrl = objToString(audioJson["thumbUrl"]),
-//                        title = objToString(audioJson["audioName"]),
-//                        media = objToString(audioJson["resourceUrl"]),
-//                        metadata = mapOf("compressedThumbUrl" to objToString(audioJson["compressedThumbUrl"]))
-//                    ),
-//                    images = listOf(
-//                        com.lasteyestudios.ipoalerts.data.models.MediaCandidate(
-//                            url = objToString(jsonElement["thumb"]),
-//                            height = heightString,
-//                            width = widthString
-//                        )
-//                    ),
-//                    metrics = com.lasteyestudios.ipoalerts.data.models.MediaMetrics(
-//                        likes = objToInt(jsonElement["lc"]),
-//                        comments = objToInt(jsonElement["c2"]),
-//                        share = objToInt(jsonElement["usc"]),
-//                        views = null
-//                    ),
-//                    description = objToString(jsonElement["c"]),
-//                    user = com.lasteyestudios.ipoalerts.data.models.User(
-//                        id = objToString(authorJson["a"]),
-//                        name = objToString(authorJson["n"]),
-//                        username = objToString(authorJson["h"]),
-//                        basePlatform = basePlatformNew,
-//                        metrics = com.lasteyestudios.ipoalerts.data.models.UserMetrics(
-//                            likes = objToString(authorJson["likeCount"]), followers = null,
-//                            media = basePlatformNew.mediaTypes,
-//                            following = null
-//                        ),
-//                        profile = com.lasteyestudios.ipoalerts.data.models.UserProfile(
-//                            verified = null,
-//                            pics = listOf(
-//                                mapOf("PhotoUrl" to objToString(authorJson["pu"])),
-//                                mapOf("ThumbUrl" to objToString(authorJson["tu"])),
-//                                mapOf("coverPic" to objToString(authorJson["coverPic"]))
-//                            ),
-//                            category = null,
-//                            description = objToString(authorJson["s"]),
-//                            externalUrl = null
-//                        ),
-//                        metadata = null
-//                    )
-//                )
-//                if (media.id != null) {
-//                    list2.add(media)
-//                }
-//            }
-//        } catch (e: Exception) {
-//            Log.d("tag", "error: $e")
-//        }
-//        return MediaResponse(list2.toList(), null).toString()
-//    }
-//
-//    fun profileFeedData(d: JsonArray): MediaResponse? {
-//        val listMedia = emptyList<com.lasteyestudios.ipoalerts.data.models.Media>()
-//        val list2 = listMedia.toMutableList()
-//        try {
-//            for (i in 0 until d.size()) {
-//                val jsonElement = d[i] as JsonObject
-//
-//                val widthString = objToString(jsonElement["w"])
-//                val heightString = objToString(jsonElement["h"])
-//                val authJson = jsonElement["ath"] as JsonObject
-//                val basePlatformNew =
-//                    com.lasteyestudios.ipoalerts.data.models.BasePlatform(
-//                        name = "moj",
-//                        mediaTypes = objToString(jsonElement["t"])
-//                    )
-//                val audioJson = jsonElement["audioMeta"] as JsonObject
-//
-//
-//                val media = com.lasteyestudios.ipoalerts.data.models.Media(
-//                    id = objToString(jsonElement["a"]),
-//                    basePlatform = basePlatformNew,
-//                    contentType = objToString(jsonElement["t"]),
-//                    videos = listOf(
-//                        com.lasteyestudios.ipoalerts.data.models.MediaCandidate(
-//                            url = objToString(jsonElement["compressedVideoUrl"])!!,
-//                            height = heightString,
-//                            width = widthString
-//                        )
-//                    ),
-//                    audio = com.lasteyestudios.ipoalerts.data.models.MediaAudio(
-//                        id = objToString(audioJson["audioId"]),
-//                        artist = objToString(audioJson["audioText"]),
-//                        artworkUrl = objToString(audioJson["thumbUrl"]),
-//                        title = objToString(audioJson["audioName"]),
-//                        media = objToString(audioJson["resourceUrl"]),
-//                        metadata = mapOf("compressedThumbUrl" to objToString(audioJson["compressedThumbUrl"]))
-//                    ),
-//                    images = listOf(
-//                        com.lasteyestudios.ipoalerts.data.models.MediaCandidate(
-//                            url = objToString(jsonElement["thumb"]),
-//                            height = heightString,
-//                            width = widthString
-//                        )
-//                    ),
-//                    metrics = com.lasteyestudios.ipoalerts.data.models.MediaMetrics(
-//                        likes = objToInt(jsonElement["lc"]),
-//                        comments = objToInt(jsonElement["c2"]),
-//                        share = objToInt(jsonElement["usc"]),
-//                        views = null
-//                    ),
-//                    description = objToString(jsonElement["c"]),
-//                    user = com.lasteyestudios.ipoalerts.data.models.User(
-//                        id = objToString(authJson["a"]),
-//                        name = objToString(authJson["n"]),
-//                        username = objToString(authJson["h"]),
-//                        basePlatform = basePlatformNew,
-//                        metrics = com.lasteyestudios.ipoalerts.data.models.UserMetrics(
-//                            likes = objToString(authJson["likeCount"]),
-//                            followers = null,
-//                            media = basePlatformNew.mediaTypes,
-//                            following = null
-//                        ),
-//                        profile = com.lasteyestudios.ipoalerts.data.models.UserProfile(
-//                            verified = null,
-//                            pics = listOf(
-//                                mapOf("PhotoUrl" to objToString(authJson["pu"])),
-//                                mapOf("ThumbUrl" to objToString(authJson["tu"])),
-//                                mapOf("coverPic" to objToString(authJson["coverPic"]))
-//                            ),
-//                            category = null,
-//                            description = objToString(authJson["s"]),
-//                            externalUrl = null
-//                        ),
-//                        metadata = null
-//                    )
-//                )
-//                if (media.id != null) {
-//                    list2.add(media)
-//                }
-//            }
-//        } catch (e: Exception) {
-//            Log.d("tag", "error: $e")
-//        }
-//        return MediaResponse(list2.toList(), null)
-//    }
+    private fun helperIPOAllotmentsData(data: String, key: String, gap: Int): String {
 
-//    fun urlMediaData(jsonObject: JsonObject): MediaResponse? {
-//        val listMedia = emptyList<com.lasteyestudios.ipoalerts.data.models.Media>()
-//        val list2 = listMedia.toMutableList()
-//        val item: JsonObject = jsonObject["item"].asJsonObject
-//        try {
-//
-//            val widthString = objToString(item["w"])
-//            val heightString = objToString(item["h"])
-//            val authJson = item["ath"] as JsonObject
-//            val basePlatformNew =
-//                com.lasteyestudios.ipoalerts.data.models.BasePlatform(
-//                    name = "moj",
-//                    mediaTypes = objToString(item["t"])
-//                )
-//            val audioJson = item["audioMeta"] as JsonObject
-//            val media = com.lasteyestudios.ipoalerts.data.models.Media(
-//                id = objToString(jsonObject["videoId"]),
-//                basePlatform = basePlatformNew,
-//                contentType = objToString(item["t"]),
-//                videos = listOf(
-//                    com.lasteyestudios.ipoalerts.data.models.MediaCandidate(
-//                        url = objToString(item["compressedVideoUrl"]),
-//                        height = heightString,
-//                        width = widthString
-//                    )
-//                ),
-//                audio = com.lasteyestudios.ipoalerts.data.models.MediaAudio(
-//                    id = objToString(audioJson["audioId"]),
-//                    artist = objToString(audioJson["audioText"]),
-//                    artworkUrl = objToString(audioJson["thumbUrl"]),
-//                    title = objToString(audioJson["audioName"]),
-//                    media = objToString(audioJson["resourceUrl"]),
-//                    metadata = mapOf("compressedThumbUrl" to objToString(audioJson["compressedThumbUrl"]))
-//                ),
-//                images = listOf(
-//                    com.lasteyestudios.ipoalerts.data.models.MediaCandidate(
-//                        url = objToString(item["thumb"]),
-//                        height = heightString,
-//                        width = widthString
-//                    )
-//                ),
-//                metrics = com.lasteyestudios.ipoalerts.data.models.MediaMetrics(
-//                    likes = objToInt(item["lc"]),
-//                    comments = objToInt(item["c2"]),
-//                    share = objToInt(item["usc"]),
-//                    views = null
-//                ),
-//                description = objToString(item["c"]),
-//                user = com.lasteyestudios.ipoalerts.data.models.User(
-//                    id = objToString(authJson["a"]),
-//                    name = objToString(authJson["n"]),
-//                    username = objToString(authJson["h"]),
-//                    basePlatform = basePlatformNew,
-//                    metrics = com.lasteyestudios.ipoalerts.data.models.UserMetrics(
-//                        likes = objToString(authJson["likeCount"]), followers = null,
-//                        media = basePlatformNew.mediaTypes,
-//                        following = null
-//                    ),
-//                    profile = com.lasteyestudios.ipoalerts.data.models.UserProfile(
-//                        verified = null,
-//                        pics = listOf(
-//                            mapOf("PhotoUrl" to objToString(authJson["pu"])),
-//                            mapOf("ThumbUrl" to objToString(authJson["tu"])),
-//                            mapOf("coverPic" to objToString(authJson["coverPic"]))
-//                        ),
-//                        category = null,
-//                        description = objToString(authJson["s"]),
-//                        externalUrl = null
-//                    ),
-//                    metadata = null
-//                )
-//            )
-//            if (media.id != null) {
-//                list2.add(media)
-//            }
-//        } catch (e: Exception) {
-//            Log.d("tag", "error: $e")
-//        }
-//        return MediaResponse(list2.toList(), null)
-//    }
-
-    private fun ipoAllotmentHelper(d: JsonArray?): List<Company> {
-        val listMedia = emptyList<Company>()
-        val list2 = listMedia.toMutableList()
-        if (d != null) {
-            for (i in 0 until d.size()) {
-                val jsonObject = d[i]?.asJsonObject
-                val jsonElementCompany = jsonObject?.get("company")?.asJsonObject
-                val company = Company(
-                    canApply = if (jsonObject?.get("canApply") != null) jsonObject.get("canApply").asBoolean else false,
-                    statusEnable = if (jsonObject?.get("statusEnable") != null) jsonObject.get("statusEnable").asBoolean else false,
-                    searchId = objToString(jsonElementCompany?.get("searchId")),
-                    additionalTxt = objToString(jsonElementCompany?.get("additionalTxt")),
-                    biddingEndDate = objToString(jsonElementCompany?.get("biddingEndDate")),
-                    biddingStartDate = objToString(jsonElementCompany?.get("biddingStartDate")),
-                    documentUrl = objToString(jsonElementCompany?.get("documentUrl")),
-                    growwShortName = objToString(jsonElementCompany?.get("growwShortName")),
-                    issuePrice = objToString(jsonElementCompany?.get("issuePrice")),
-                    issueSize = objToString(jsonElementCompany?.get("issueSize")),
-                    listingDate = objToString(jsonElementCompany?.get("listingDate")),
-                    listingGains = objToString(jsonElementCompany?.get("listingGains")),
-                    listingPrice = objToString(jsonElementCompany?.get("listingPrice")),
-                    logoUrl = objToString(jsonElementCompany?.get("logoUrl")),
-                    lotSize = objToString(jsonElementCompany?.get("lotSize")),
-                    maxPrice = objToString(jsonElementCompany?.get("maxPrice")),
-                    minBidQuantity = objToString(jsonElementCompany?.get("minBidQuantity")),
-                    minPrice = objToString(jsonElementCompany?.get("minPrice")),
-                    name = objToString(jsonElementCompany?.get("name")),
-                    retailSubscriptionRate = objToString(jsonElementCompany?.get("retailSubscriptionRate")),
-                    status = objToString(jsonElementCompany?.get("status")),
-                    symbol = objToString(jsonElementCompany?.get("symbol"))
-                )
-                if (company.searchId != "") {
-                    list2.add(company)
-                }
-            }
-        }
-        return list2.toList()
-
-    }
-
-    fun growIPOListingToData(res: JsonObject?): IPOListingModel? {
-        try {
-
-            val active = res?.get("ACTIVE")?.asJsonArray
-            val closed = res?.get("CLOSED")?.asJsonArray
-            val upcoming = res?.get("UPCOMING")?.asJsonArray
-            val listed = res?.get("LISTED")?.asJsonArray
-            Log.d(IPO_LOG_TAG, "upcoming $upcoming")
-
-            return IPOListingModel(
-                ACTIVE = ipoAllotmentHelper(active),
-                CLOSED = ipoAllotmentHelper(closed),
-                LISTED = ipoAllotmentHelper(listed),
-                UPCOMING = ipoAllotmentHelper(upcoming)
-
-            )
-        } catch (e: Exception) {
-            Log.d(
-                IPO_LOG_TAG,
-                "transformer growIPOListingToData error -> ${e.stackTraceToString()}"
-            )
-        }
-        return null
-
+        val first = data.indexOf(key, gap) + key.length + 1
+        val sec = data.indexOf(key, first) - 2
+        val temp = data.substring(first, sec)
+        return objToString(temp)
     }
 
     private fun financialsDetailsHelper(financials: JsonArray?): List<Financial>? {
@@ -403,6 +94,77 @@ class Transformer {
         return null
     }
 
+    private fun ipoAllotmentHelper(d: JsonArray?): List<Company> {
+        val listMedia = emptyList<Company>()
+        val list2 = listMedia.toMutableList()
+        if (d != null) {
+            for (i in 0 until d.size()) {
+                val jsonObject = d[i]?.asJsonObject
+                val jsonElementCompany = jsonObject?.get("company")?.asJsonObject
+                val company = Company(
+                    canApply = if (jsonObject?.get("canApply") != null) jsonObject.get("canApply").asBoolean else false,
+                    statusEnable = if (jsonObject?.get("statusEnable") != null) jsonObject.get("statusEnable").asBoolean else false,
+                    searchId = objToString(jsonElementCompany?.get("searchId")),
+                    additionalTxt = objToString(jsonElementCompany?.get("additionalTxt")),
+                    biddingEndDate = objToString(jsonElementCompany?.get("biddingEndDate")),
+                    biddingStartDate = objToString(jsonElementCompany?.get("biddingStartDate")),
+                    documentUrl = objToString(jsonElementCompany?.get("documentUrl")),
+                    growwShortName = objToString(jsonElementCompany?.get("growwShortName")),
+                    issuePrice = objToString(jsonElementCompany?.get("issuePrice")),
+                    issueSize = objToString(jsonElementCompany?.get("issueSize")),
+                    listingDate = objToString(jsonElementCompany?.get("listingDate")),
+                    listingGains = objToString(jsonElementCompany?.get("listingGains")),
+                    listingPrice = objToString(jsonElementCompany?.get("listingPrice")),
+                    logoUrl = objToString(jsonElementCompany?.get("logoUrl")),
+                    lotSize = objToString(jsonElementCompany?.get("lotSize")),
+                    maxPrice = objToString(jsonElementCompany?.get("maxPrice")),
+                    minBidQuantity = objToString(jsonElementCompany?.get("minBidQuantity")),
+                    minPrice = objToString(jsonElementCompany?.get("minPrice")),
+                    name = objToString(jsonElementCompany?.get("name")),
+                    retailSubscriptionRate = objToString(jsonElementCompany?.get("retailSubscriptionRate")),
+                    status = objToString(jsonElementCompany?.get("status")),
+                    symbol = objToString(jsonElementCompany?.get("symbol"))
+                )
+                if (company.searchId != "") {
+                    list2.add(company)
+                }
+            }
+        }
+        return list2.toList()
+
+    }
+
+
+    /*
+    * Specific Transformers
+    * */
+
+    fun growIPOListingToData(res: JsonObject?): IPOListingModel? {
+        try {
+
+            val active = res?.get("ACTIVE")?.asJsonArray
+            val closed = res?.get("CLOSED")?.asJsonArray
+            val upcoming = res?.get("UPCOMING")?.asJsonArray
+            val listed = res?.get("LISTED")?.asJsonArray
+            Log.d(IPO_LOG_TAG, "upcoming $upcoming")
+
+            return IPOListingModel(
+                ACTIVE = ipoAllotmentHelper(active),
+                CLOSED = ipoAllotmentHelper(closed),
+                LISTED = ipoAllotmentHelper(listed),
+                UPCOMING = ipoAllotmentHelper(upcoming)
+
+            )
+        } catch (e: Exception) {
+            Log.d(
+                IPO_LOG_TAG,
+                "transformer growIPOListingToData error -> ${e.stackTraceToString()}"
+            )
+        }
+        return null
+
+    }
+
     fun growIPODetailsToDetails(d: JsonObject?): IPODetailsModel? {
         try {
             val aboutCompany = d?.get("aboutCompany")?.asJsonObject
@@ -453,15 +215,8 @@ class Transformer {
         return null
     }
 
-    private fun helperAvailableIPOAllotmentsData(data: String, key: String, gap: Int): String {
 
-        val first = data.indexOf(key, gap) + key.length + 1
-        val sec = data.indexOf(key, first) - 2
-        val temp = data.substring(first, sec)
-        return objToString(temp)
-    }
-
-    fun getAvailableIPOAllotmentsData(data: String?): List<AvailableAllotmentModel>? {
+    fun getAvailableIPOAllotmentsData(data: String?): List<AvailableAllotmentModel> {
         if (!data.isNullOrEmpty()) {
             val listMedia = emptyList<AvailableAllotmentModel>()
             val list2 = listMedia.toMutableList()
@@ -476,9 +231,10 @@ class Transformer {
 
 //            Log.d(IPO_LOG_TAG, "final data -> $data")
 
-//            if (data=="NewDataSet")
-//                return null
-            var first = 0
+            if (data.length < 12) {
+                return emptyList()
+            }
+            var first: Int
             var sec = 0
             val count = ("\\bTable\\b".toRegex().findAll(data).count()) / 2
 //            val count = ("Table".count { data.contains(it) }) / 2
@@ -488,15 +244,15 @@ class Transformer {
 //                Log.d(IPO_LOG_TAG, "final first -> $first and sec -> $sec and count -> $count and size -> ${data.length}")
 
                 val availableAllotmentModel = AvailableAllotmentModel(
-                    company_id = helperAvailableIPOAllotmentsData(data, "company_id", first),
-                    closing_date = helperAvailableIPOAllotmentsData(data, "closing_date", first),
-                    COMPANY_SE = helperAvailableIPOAllotmentsData(data, "COMPANY_SE", first),
-                    companyname = helperAvailableIPOAllotmentsData(data, "companyname", first),
-                    diff = helperAvailableIPOAllotmentsData(data, "diff", first),
-                    lead_managers = helperAvailableIPOAllotmentsData(data, "lead_managers", first),
-                    offer_price = helperAvailableIPOAllotmentsData(data, "offer_price", first),
-                    REGD_OFF = helperAvailableIPOAllotmentsData(data, "REGD_OFF", first),
-                    total_shares = helperAvailableIPOAllotmentsData(data, "total_shares", first)
+                    company_id = helperIPOAllotmentsData(data, "company_id", first),
+                    closing_date = helperIPOAllotmentsData(data, "closing_date", first),
+                    COMPANY_SE = helperIPOAllotmentsData(data, "COMPANY_SE", first),
+                    companyname = helperIPOAllotmentsData(data, "companyname", first),
+                    diff = helperIPOAllotmentsData(data, "diff", first),
+                    lead_managers = helperIPOAllotmentsData(data, "lead_managers", first),
+                    offer_price = helperIPOAllotmentsData(data, "offer_price", first),
+                    REGD_OFF = helperIPOAllotmentsData(data, "REGD_OFF", first),
+                    total_shares = helperIPOAllotmentsData(data, "total_shares", first)
                 )
 
 //                Log.d(IPO_LOG_TAG, "final id -> ${availableAllotmentModel.company_id} and se -> ${availableAllotmentModel.COMPANY_SE}")
@@ -505,6 +261,31 @@ class Transformer {
                 }
             }
             return list2.toList()
+        }
+        return emptyList()
+    }
+
+    fun searchAllotmentResults(data: String?): SearchAllotmentResultModel? {
+
+//        val data = "<NewDataSet>  <Table>    <higher_priceband>1180</higher_priceband>    <pull>X</pull>    <offer_price>1180</offer_price>    <NAME1>ASHWIN MOORTHY .</NAME1>    <ALLOT>0</ALLOT>    <SHARES>168</SHARES>    <AMTADJ>0</AMTADJ>    <companyname>Sapphire Foods India Limited - IPO</companyname>    <PEMNDG>Retail</PEMNDG>  </Table></NewDataSet>"
+
+        if (data != null && data.length > 12) {
+//            Log.d(IPO_LOG_TAG, "final data -> $data")
+            val first: Int = data.indexOf("Table") + 4
+
+            val searchAllotmentResultModel = SearchAllotmentResultModel(
+                higher_priceband = helperIPOAllotmentsData(data, "higher_priceband", first),
+                pull = helperIPOAllotmentsData(data, "pull", first),
+                offer_price = helperIPOAllotmentsData(data, "offer_price", first),
+                NAME1 = helperIPOAllotmentsData(data, "NAME1", first),
+                ALLOT = helperIPOAllotmentsData(data, "ALLOT", first),
+                SHARES = helperIPOAllotmentsData(data, "SHARES", first),
+                AMTADJ = helperIPOAllotmentsData(data, "AMTADJ", first),
+                companyname = helperIPOAllotmentsData(data, "companyname", first),
+                PEMNDG = helperIPOAllotmentsData(data, "PEMNDG", first)
+            )
+            Log.d(IPO_LOG_TAG, "final id -> ${searchAllotmentResultModel.companyname} and e -> $searchAllotmentResultModel")
+            return searchAllotmentResultModel
         }
         return null
     }
