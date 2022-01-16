@@ -9,5 +9,14 @@
         android:id="@+id/watchListFragment"
         android:name="com.lasteyestudios.ipoalerts.tabs.watchlist.WatchListFragment"
         android:label="fragment_connect"
-        tools:layout="@layout/fragment_watch_list" />
+        tools:layout="@layout/fragment_watch_list" >
+        <action
+            android:id="@+id/action_watchListFragment_to_listedFragment"
+            app:destination="@id/listedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listedFragment"
+        android:name="com.lasteyestudios.ipoalerts.tabs.listed.ListedFragment"
+        android:label="fragment_listed"
+        tools:layout="@layout/fragment_listed" />
 </navigation>

@@ -2,6 +2,7 @@ package com.lasteyestudios.ipoalerts.data.ipo.common
 
 import android.util.Log
 import com.google.gson.JsonArray
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.lasteyestudios.ipoalerts.data.models.availableallotmentmodel.AvailableAllotmentModel
 import com.lasteyestudios.ipoalerts.data.models.ipodetailsmodel.*
@@ -19,7 +20,7 @@ class Transformer {
     * */
 
     private fun objToString(temp: Any?): String {
-        if (temp == null) {
+        if (temp.toString() == "null") {
             return ""
         }
         val i = temp.toString().replace("\"", "")
@@ -80,14 +81,18 @@ class Transformer {
         return null
     }
 
-    private fun listedOnDetailsHelper(d: JsonArray?): List<String>? {
+    private fun listedOnDetailsHelper(temp: JsonElement?): List<String>? {
+        if(temp.toString() == "null"){
+            return null
+        }
+        val d= temp?.asJsonArray
         val listMedia = emptyList<String>()
         val list2 = listMedia.toMutableList()
 
         if (d != null) {
             for (i in 0 until d.size()) {
-                val temp = objToString(d[i])
-                list2.add(temp)
+                val temp1 = objToString(d.get(i))
+                list2.add(temp1)
             }
             return list2.toList()
         }
@@ -153,7 +158,6 @@ class Transformer {
                 CLOSED = ipoAllotmentHelper(closed),
                 LISTED = ipoAllotmentHelper(listed),
                 UPCOMING = ipoAllotmentHelper(upcoming)
-
             )
         } catch (e: Exception) {
             Log.d(
@@ -168,9 +172,11 @@ class Transformer {
     fun growIPODetailsToDetails(d: JsonObject?): IPODetailsModel? {
         try {
             val aboutCompany = d?.get("aboutCompany")?.asJsonObject
-            val listing = d?.get("listing")?.asJsonObject
-            val financials = d?.get("financials")?.asJsonArray
-            val subscriptionRates = d?.get("subscriptionRates")?.asJsonArray
+            val listing = if (d?.get("listing").toString() != "null") d?.get("listing")?.asJsonObject else null
+            val financials =
+                if (d?.get("financials").toString() != "null") d?.get("financials")?.asJsonArray else null
+            val subscriptionRates =
+                if (d?.get("subscriptionRates").toString() != "null") d?.get("subscriptionRates")?.asJsonArray else null
 
             return IPODetailsModel(
                 symbol = objToString(d?.get("symbol")),
@@ -199,7 +205,7 @@ class Transformer {
                 issueType = objToString(d?.get("issueType")),
                 listing = Listing(
                     listingPrice = objToString(listing?.get("listingPrice")),
-                    listedOn = listedOnDetailsHelper(listing?.get("listedOn")?.asJsonArray)
+                    listedOn = listedOnDetailsHelper(listing?.get("listedOn"))
                 ),
                 minBidQty = objToString(d?.get("minBidQty")),
                 startDate = objToString(d?.get("startDate")),
@@ -209,7 +215,7 @@ class Transformer {
         } catch (e: Exception) {
             Log.d(
                 IPO_LOG_TAG,
-                "transformer growIPOListingToData error -> ${e.stackTraceToString()}"
+                "transformer growIPODetailsListingToData error -> ${e.stackTraceToString()}"
             )
         }
         return null
@@ -284,7 +290,8 @@ class Transformer {
                 companyname = helperIPOAllotmentsData(data, "companyname", first),
                 PEMNDG = helperIPOAllotmentsData(data, "PEMNDG", first)
             )
-            Log.d(IPO_LOG_TAG, "final id -> ${searchAllotmentResultModel.companyname} and e -> $searchAllotmentResultModel")
+            Log.d(IPO_LOG_TAG,
+                "final id -> ${searchAllotmentResultModel.companyname} and e -> $searchAllotmentResultModel")
             return searchAllotmentResultModel
         }
         return null

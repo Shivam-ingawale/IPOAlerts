@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".tabs.current.CurrentFragment">
+    tools:context=".tabs.details.DetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -24,6 +24,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/pic_card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    app:cardCornerRadius="52dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/creator_pic"
+                        android:layout_width="84dp"
+                        android:layout_height="84dp"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_background" />
+
+                </androidx.cardview.widget.CardView>
+
+
                 <TextView
                     android:id="@+id/creator_name"
                     android:layout_width="0dp"
@@ -31,7 +52,6 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="32dp"
                     android:ellipsize="end"
                     android:gravity="top"
                     android:maxLines="1"
@@ -39,11 +59,11 @@
                     android:textIsSelectable="true"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/pic_card_view"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey " />
+                    tools:text="this is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text tthis is some text this is some text this is some text" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -57,27 +77,11 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:gravity="center"
-        android:paddingTop="10dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
         android:paddingBottom="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:itemCount="4"
-        tools:listitem="@layout/ipo_main_item" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/retry_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        android:visibility="gone"
-        android:elevation="2dp"
-        android:focusable="true"
-        android:text="@string/retry"
-        app:icon="@drawable/ic_reload"
-        app:layout_anchor="@id/main_recycler_view"
-        app:layout_anchorGravity="bottom|center_horizontal" />
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

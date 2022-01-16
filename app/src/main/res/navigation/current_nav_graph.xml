@@ -9,5 +9,15 @@
         android:id="@+id/currentFragment"
         android:name="com.lasteyestudios.ipoalerts.tabs.current.CurrentFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_current" />
+        tools:layout="@layout/fragment_current">
+
+        <action
+            android:id="@+id/action_currentFragment_to_details_nav_graph"
+            app:destination="@id/details_nav_graph">
+            <argument
+                android:name="searchId"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <include app:graph="@navigation/details_nav_graph" />
 </navigation>

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.lasteyestudios.ipoalerts.R
 import com.lasteyestudios.ipoalerts.databinding.FragmentWatchListBinding
 
 class WatchListFragment : Fragment() {
@@ -26,6 +28,10 @@ class WatchListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.text.setOnClickListener {
+
+            findNavController().navigate(R.id.action_watchListFragment_to_listedFragment)
+        }
 //        watchListViewModel.loadData()
 //        viewLifecycleOwner.lifecycleScope.launch {
 //

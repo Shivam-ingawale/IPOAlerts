@@ -5,4 +5,7 @@
     <string name="watch_list">Watch List</string>
     <string name="listed_ipos">Listed IPOs</string>
     <string name="current_ipos">Current IPOs</string>
+    <string name="lot_size">Lot Size:</string>
+    <string name="price_range">Price Range</string>
+    <string name="retry">Retry</string>
 </resources>

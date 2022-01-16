@@ -15,11 +15,11 @@ class ListedFragment : Fragment() {
     private var _binding: FragmentListedBinding? = null
     private val binding get() = _binding!!
 
-    private val listedViewModel : ListedViewModel by activityViewModels()
+    private val listedViewModel: ListedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentListedBinding.inflate(inflater, container, false)
@@ -29,7 +29,8 @@ class ListedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textView.setOnClickListener {
-            findNavController().navigate(R.id.action_ListedFragment_to_blankFragment)
+
+            findNavController().navigate(R.id.action_ListedFragment_to_watchListFragment2)
         }
     }
 

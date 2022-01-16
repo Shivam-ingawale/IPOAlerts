@@ -5,6 +5,7 @@ import com.lasteyestudios.ipoalerts.data.ipo.IPOClient
 import com.lasteyestudios.ipoalerts.data.models.Response
 import com.lasteyestudios.ipoalerts.data.models.availableallotmentmodel.AvailableAllotmentModel
 import com.lasteyestudios.ipoalerts.data.models.ipodetailsmodel.IPODetailsModel
+import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.Company
 import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.IPOListingModel
 import com.lasteyestudios.ipoalerts.data.models.searchallotmentresultmodel.SearchAllotmentResultModel
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
@@ -26,13 +27,35 @@ class NetworkRepository {
     }
 
     private var ipoClient: IPOClient = IPOClient.getInstance()
+    private var mCompantListing: IPOListingModel? = null
+    private var currentlyGettingExploreResponse: Boolean = false
 
-    fun getIPOCompanyListings(): Flow<Response<IPOListingModel?>> {
+    fun getIPOCompanyListings(): Flow<Response<List<List<Company?>?>>> {
         //done
+        // don't call for explore feed when its already running.
+        if (currentlyGettingExploreResponse) return flow { emit(Response.Loading) }
+        mCompantListing?.LISTED?.size?.let {
+            if (mCompantListing?.LISTED?.size!! > 0) {
+                Log.d(
+                    IPO_LOG_TAG,
+                    "getIPOCompanyListings: already had a value with  items"
+                )
+                return flow {
+                    emit(Response.Success(listOf<List<Company?>?>(mCompantListing?.ACTIVE,
+                        mCompantListing?.CLOSED,
+                        mCompantListing?.LISTED,
+                        mCompantListing?.UPCOMING)))
+                }
+            }
+        }
+
         return flow {
             emit(Response.Loading)
-            val mCompantListing = withContext(Dispatchers.IO) { ipoClient.getIPOCompanyListings() }
-            emit(Response.Success(mCompantListing))
+            var mCompantListing = withContext(Dispatchers.IO) { ipoClient.getIPOCompanyListings() }
+            emit(Response.Success(listOf<List<Company?>?>(mCompantListing?.ACTIVE,
+                mCompantListing?.CLOSED,
+                mCompantListing?.LISTED,
+                mCompantListing?.UPCOMING)))
             Log.d(IPO_LOG_TAG, "getIPOCompanyListings Network Repo-> Done")
         }
     }
@@ -60,11 +83,19 @@ class NetworkRepository {
         }
     }
 
-    fun getSearchAllotmentsResults(companyId: String, userDoc: String, keyWord: String): Flow<Response<SearchAllotmentResultModel?>> {
+    fun getSearchAllotmentsResults(
+        companyId: String,
+        userDoc: String,
+        keyWord: String,
+    ): Flow<Response<SearchAllotmentResultModel?>> {
         //done
         return flow {
             emit(Response.Loading)
-            val mResultAllotment = withContext(Dispatchers.IO) { ipoClient.getSearchAllotmentsResults(companyId, keyWord, userDoc) }
+            val mResultAllotment = withContext(Dispatchers.IO) {
+                ipoClient.getSearchAllotmentsResults(companyId,
+                    keyWord,
+                    userDoc)
+            }
             emit(Response.Success(mResultAllotment))
             Log.d(
                 IPO_LOG_TAG,

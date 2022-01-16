@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 
 class ListedViewModel : ViewModel() {
 
-    private val _currentIPOs = MutableLiveData<List<String>>(listOf())
+    private val _currentIPOs = MutableLiveData<List<String>>()
     val currentIPOs: LiveData<List<String>> get() = _currentIPOs
 
     fun loadData() {
