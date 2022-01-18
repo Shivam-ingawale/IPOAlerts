@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listed_nav_graph"
+    app:startDestination="@id/ListedFragment">
+
+    <fragment
+        android:id="@+id/ListedFragment"
+        android:name="com.lasteyestudios.ipoalerts.tabs.allotment.AllotmentFragment"
+        android:label="fragment_explore"
+        tools:layout="@layout/fragment_allotment" >
+        <argument
+            android:name="searchId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_ListedFragment_to_searchAllotmentFragment"
+            app:destination="@id/searchAllotmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchAllotmentFragment"
+        android:name="com.lasteyestudios.ipoalerts.tabs.allotment.searchallotment.SearchAllotmentFragment"
+        android:label="fragment_search_allotment"
+        tools:layout="@layout/fragment_search_allotment" >
+        <argument
+            android:name="companyId"
+            app:argType="string" />
+        <argument
+            android:name="companyName"
+            app:argType="string" />
+    </fragment>
+</navigation>

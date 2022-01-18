@@ -9,11 +9,13 @@
         android:id="@+id/currentFragment"
         android:name="com.lasteyestudios.ipoalerts.tabs.current.CurrentFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_current">
+        tools:layout="@layout/fragment_ipo">
 
         <action
             android:id="@+id/action_currentFragment_to_details_nav_graph"
-            app:destination="@id/details_nav_graph">
+            app:destination="@id/details_nav_graph"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim">
             <argument
                 android:name="searchId"
                 app:argType="string" />

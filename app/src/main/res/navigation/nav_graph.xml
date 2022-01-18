@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     app:startDestination="@+id/current_nav_graph">
-    <include app:graph="@navigation/current_nav_graph" />
-    <include app:graph="@navigation/listed_nav_graph" />
+    <include app:graph="@navigation/ipo_nav_graph" />
+    <include app:graph="@navigation/allotment_nav_graph" />
     <include app:graph="@navigation/watch_list_nav_graph" />
 </navigation>

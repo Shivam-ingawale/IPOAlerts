@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/listedFragment"
-        android:name="com.lasteyestudios.ipoalerts.tabs.listed.ListedFragment"
+        android:name="com.lasteyestudios.ipoalerts.tabs.allotment.AllotmentFragment"
         android:label="fragment_listed"
-        tools:layout="@layout/fragment_listed" />
+        tools:layout="@layout/fragment_allotment" />
 </navigation>

@@ -27,24 +27,27 @@ class NetworkRepository {
     }
 
     private var ipoClient: IPOClient = IPOClient.getInstance()
-    private var mCompantListing: IPOListingModel? = null
+    private var myIpoListing: IPOListingModel? = null
     private var currentlyGettingExploreResponse: Boolean = false
+
+    private var availableAllotments: List<AvailableAllotmentModel?>? = null
+    private var currentlyGettingAvailableAllotments: Boolean = false
 
     fun getIPOCompanyListings(): Flow<Response<List<List<Company?>?>>> {
         //done
         // don't call for explore feed when its already running.
         if (currentlyGettingExploreResponse) return flow { emit(Response.Loading) }
-        mCompantListing?.LISTED?.size?.let {
-            if (mCompantListing?.LISTED?.size!! > 0) {
+        myIpoListing?.LISTED?.size?.let {
+            if (myIpoListing?.LISTED?.size!! > 0) {
                 Log.d(
                     IPO_LOG_TAG,
                     "getIPOCompanyListings: already had a value with  items"
                 )
                 return flow {
-                    emit(Response.Success(listOf<List<Company?>?>(mCompantListing?.ACTIVE,
-                        mCompantListing?.CLOSED,
-                        mCompantListing?.LISTED,
-                        mCompantListing?.UPCOMING)))
+                    emit(Response.Success(listOf<List<Company?>?>(myIpoListing?.ACTIVE,
+                        myIpoListing?.UPCOMING,
+                        myIpoListing?.LISTED,
+                        myIpoListing?.CLOSED)))
                 }
             }
         }
@@ -53,9 +56,9 @@ class NetworkRepository {
             emit(Response.Loading)
             var mCompantListing = withContext(Dispatchers.IO) { ipoClient.getIPOCompanyListings() }
             emit(Response.Success(listOf<List<Company?>?>(mCompantListing?.ACTIVE,
-                mCompantListing?.CLOSED,
+                mCompantListing?.UPCOMING,
                 mCompantListing?.LISTED,
-                mCompantListing?.UPCOMING)))
+                mCompantListing?.CLOSED)))
             Log.d(IPO_LOG_TAG, "getIPOCompanyListings Network Repo-> Done")
         }
     }
@@ -71,15 +74,28 @@ class NetworkRepository {
         }
     }
 
-    fun getAvailableIPOAllotmentsData(): Flow<Response<List<AvailableAllotmentModel>?>> {
+    fun getAvailableIPOAllotmentsData(): Flow<Response<List<AvailableAllotmentModel?>?>> {
         //done
+        // don't call for explore feed when its already running.
+        if (currentlyGettingAvailableAllotments) return flow { emit(Response.Loading) }
+
+        if (availableAllotments != null) {
+            Log.d(
+                IPO_LOG_TAG,
+                "availableAllotments: already had a value with  items"
+            )
+            return flow {
+                emit(Response.Success(availableAllotments))
+            }
+        }
+
         Log.d(IPO_LOG_TAG, "network repo -> start")
         return flow {
             emit(Response.Loading)
-            val mCompanyListing =
+            availableAllotments =
                 withContext(Dispatchers.IO) { ipoClient.getAvailableIPOAllotmentsData() }
-            emit(Response.Success(mCompanyListing))
-            Log.d(IPO_LOG_TAG, "getIPOAllotments Network Repo-> Done data -> $mCompanyListing")
+            emit(Response.Success(availableAllotments))
+            Log.d(IPO_LOG_TAG, "getIPOAllotments Network Repo-> Done data -> $availableAllotments")
         }
     }
 

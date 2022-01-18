@@ -29,10 +29,36 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
         fun bind(item: Company?) {
             item?.let {
                 binding.companyName.text = it.growwShortName
-                binding.lotSize.text = it.lotSize
+                if (it.lotSize != "") {
+                    binding.lotSize.text = it.lotSize
+                } else {
+                    binding.lotSize.text = "N/A"
+                }
+
+                if (it.issueSize != "") {
+                    binding.issueSize.text = it.issueSize
+                } else {
+                    binding.issueSize.text = "N/A"
+                }
+
+
+                if (it.status == "LISTED") {
+                    binding.offerDate.text = it.listingDate
+                } else {
+                    if (it.biddingStartDate != "") {
+                        binding.offerDate.text = it.biddingStartDate
+                    } else {
+                        binding.offerDate.text = "N/A"
+                    }
+                }
+
                 val range = it.minPrice + " - " + it.maxPrice
-                binding.priceRange.text = range
-                binding.ipoCard.setOnClickListener {_->
+                if (range != " - ") {
+                    binding.priceRange.text = range
+                } else {
+                    binding.priceRange.text = "N/A"
+                }
+                binding.ipoCard.setOnClickListener { _ ->
                     onItemClicked(it.searchId.toString())
                 }
                 Glide.with(binding.logoImage.context).load(it.logoUrl).centerCrop().transition(

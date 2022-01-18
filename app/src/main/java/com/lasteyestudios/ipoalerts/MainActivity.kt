@@ -1,6 +1,7 @@
 package com.lasteyestudios.ipoalerts
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -28,22 +29,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         networkStatus = NetworkStatus(this).apply {
-            if (!getCurrentNetworkStatus()) {
-                snackBar = Snackbar.make(binding.navHostFragment,"No network connection!", Snackbar.LENGTH_LONG)
-                snackBar?.setAction("DISMISS") { snackBar?.dismiss() }
-                    ?.setAnchorView(binding.navHostFragment.id)
-                    ?.show()
-            } else {
-                snackBar?.dismiss()
+            startNetworkCallback {
+                if (!it) {
+                    snackBar = Snackbar.make(binding.bottomNavView,
+                        "No network connection!",
+                        Snackbar.LENGTH_LONG)
+                    snackBar?.setAction("DISMISS") { snackBar?.dismiss() }
+                        ?.setAnchorView(binding.bottomNavView)
+                        ?.show()
+                } else snackBar?.dismiss()
             }
         }
+
         sharedViewModel.loadHomeIPOData()
         val navHostFragment =
             supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
         currentNavController = navHostFragment.navController
         binding.bottomNavView.setupWithNavController(currentNavController)
 
+        networkStatus = NetworkStatus(this).apply {
+            if (!getCurrentNetworkStatus()) {
+                Toast.makeText(applicationContext, "No network connection!", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
     }
 
     override fun onDestroy() {

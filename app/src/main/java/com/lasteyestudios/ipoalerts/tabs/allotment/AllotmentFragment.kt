@@ -1,4 +1,4 @@
-package com.lasteyestudios.ipoalerts.tabs.current
+package com.lasteyestudios.ipoalerts.tabs.allotment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,47 +9,47 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.lasteyestudios.ipoalerts.data.models.Response
-import com.lasteyestudios.ipoalerts.databinding.FragmentIpoBinding
-import com.lasteyestudios.ipoalerts.tabs.common.SharedViewModel
-import com.lasteyestudios.ipoalerts.utils.DETAILFRAGMENTSEARCHID
+import com.lasteyestudios.ipoalerts.databinding.FragmentAllotmentBinding
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 
-class CurrentFragment : Fragment() {
+class AllotmentFragment : Fragment() {
 
-    private var _binding: FragmentIpoBinding? = null
+    private var _binding: FragmentAllotmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mAdapter: BlockRecyclerAdapter
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val currentViewModel: CurrentViewModel by activityViewModels()
+
+    private lateinit var mAdapter: AllotmentAdapter
+    private val allotmentViewModel: AllotmentViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-
-        _binding = FragmentIpoBinding.inflate(inflater, container, false)
+        allotmentViewModel.loadAllotmentIPOData()
+        _binding = FragmentAllotmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mAdapter= AllotmentAdapter {id,name->
 
-        mAdapter = BlockRecyclerAdapter({ searchId ->
-            sharedViewModel.indexStateBundle.putString(DETAILFRAGMENTSEARCHID, searchId)
-            findNavController().navigate(CurrentFragmentDirections.actionCurrentFragmentToDetailsNavGraph(
-                searchId))
-        }, {
+            findNavController().navigate(AllotmentFragmentDirections.actionListedFragmentToSearchAllotmentFragment(
+                companyId = id,
+                companyName = name))
 
-        })
-
-        sharedViewModel.currentIPOs.observe(viewLifecycleOwner, { myResponse ->
+        }
+//        binding.textView.setOnClickListener {
+//
+//            findNavController().navigate(R.id.action_ListedFragment_to_watchListFragment2)
+//        }
+        allotmentViewModel.allotmentIPOs.observe(viewLifecycleOwner, { myResponse ->
             when (myResponse) {
                 Response.Error -> {
                     handleRetry()
                 }
                 Response.Loading -> {
-                    binding.retryFab.visibility = View.INVISIBLE
+                    binding.retryAllotmentFab.visibility = View.INVISIBLE
 //                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Response.Success -> {
@@ -58,23 +58,23 @@ class CurrentFragment : Fragment() {
                 }
             }
         })
-        binding.mainRecyclerView.adapter = mAdapter
+        binding.allotmentRecyclerView.adapter = mAdapter
     }
+
+    private fun handleRetry() {
+        binding.retryAllotmentFab.apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                Log.d(IPO_LOG_TAG, "handleRetry clicked")
+                allotmentViewModel.loadAllotmentIPOData()
+            }
+        }
+//        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    private fun handleRetry() {
-        binding.retryFab.apply {
-            visibility = View.VISIBLE
-            setOnClickListener {
-                Log.d(IPO_LOG_TAG,  "handleRetry clicked")
-                sharedViewModel.loadHomeIPOData()
-            }
-        }
-//        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 }

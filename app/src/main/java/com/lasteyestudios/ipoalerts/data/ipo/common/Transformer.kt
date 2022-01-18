@@ -19,6 +19,18 @@ class Transformer {
     * UTIL functions
     * */
 
+    private fun getFormattedNumber(count: String): String {
+        if (count == "") {
+            return ""
+        } else {
+            val temp = count.toLong()
+            if (temp < 1000) return "" + temp
+            if (temp < 100000) return "" + temp/1000+"k"
+            if (temp < 10000000) return "" + temp/100000+"Lac"
+            return "" + temp/10000000+"Cr"
+        }
+    }
+
     private fun objToString(temp: Any?): String {
         if (temp.toString() == "null") {
             return ""
@@ -82,10 +94,10 @@ class Transformer {
     }
 
     private fun listedOnDetailsHelper(temp: JsonElement?): List<String>? {
-        if(temp.toString() == "null"){
+        if (temp.toString() == "null") {
             return null
         }
-        val d= temp?.asJsonArray
+        val d = temp?.asJsonArray
         val listMedia = emptyList<String>()
         val list2 = listMedia.toMutableList()
 
@@ -115,8 +127,8 @@ class Transformer {
                     biddingStartDate = objToString(jsonElementCompany?.get("biddingStartDate")),
                     documentUrl = objToString(jsonElementCompany?.get("documentUrl")),
                     growwShortName = objToString(jsonElementCompany?.get("growwShortName")),
-                    issuePrice = objToString(jsonElementCompany?.get("issuePrice")),
-                    issueSize = objToString(jsonElementCompany?.get("issueSize")),
+                    issuePrice = (objToString(jsonElementCompany?.get("issuePrice"))),
+                    issueSize = getFormattedNumber(objToString(jsonElementCompany?.get("issueSize"))),
                     listingDate = objToString(jsonElementCompany?.get("listingDate")),
                     listingGains = objToString(jsonElementCompany?.get("listingGains")),
                     listingPrice = objToString(jsonElementCompany?.get("listingPrice")),
@@ -172,11 +184,17 @@ class Transformer {
     fun growIPODetailsToDetails(d: JsonObject?): IPODetailsModel? {
         try {
             val aboutCompany = d?.get("aboutCompany")?.asJsonObject
-            val listing = if (d?.get("listing").toString() != "null") d?.get("listing")?.asJsonObject else null
+            val listing = if (d?.get("listing")
+                    .toString() != "null"
+            ) d?.get("listing")?.asJsonObject else null
             val financials =
-                if (d?.get("financials").toString() != "null") d?.get("financials")?.asJsonArray else null
+                if (d?.get("financials")
+                        .toString() != "null"
+                ) d?.get("financials")?.asJsonArray else null
             val subscriptionRates =
-                if (d?.get("subscriptionRates").toString() != "null") d?.get("subscriptionRates")?.asJsonArray else null
+                if (d?.get("subscriptionRates")
+                        .toString() != "null"
+                ) d?.get("subscriptionRates")?.asJsonArray else null
 
             return IPODetailsModel(
                 symbol = objToString(d?.get("symbol")),
@@ -186,31 +204,31 @@ class Transformer {
                 lotSize = objToString(d?.get("lotSize")),
                 logoUrl = objToString(d?.get("logoUrl")),
                 listingDate = objToString(d?.get("listingDate")),
-                issueSize = objToString(d?.get("issueSize")),
-                issuePrice = objToString(d?.get("issuePrice")),
-                growwShortName = objToString(d?.get("growwShortName")),
-                documentUrl = objToString(d?.get("documentUrl")),
-                status = objToString(d?.get("status")),
-                aboutCompany = if (aboutCompany != null) AboutCompany(
-                    aboutCompany = objToString(aboutCompany["aboutCompany"]),
-                    managingDirector = objToString(aboutCompany["managingDirector"]),
-                    yearFounded = objToString(aboutCompany["yearFounded"])
-                ) else null,
-                applicationDetails = objToString(d?.get("applicationDetails")),
-                bannerText = objToString(d?.get("bannerText")),
-                companyName = objToString(d?.get("companyName")),
-                companyShortName = objToString(d?.get("companyShortName")),
-                endDate = objToString(d?.get("endDate")),
-                financials = financialsDetailsHelper(financials),
-                issueType = objToString(d?.get("issueType")),
-                listing = Listing(
-                    listingPrice = objToString(listing?.get("listingPrice")),
-                    listedOn = listedOnDetailsHelper(listing?.get("listedOn"))
-                ),
-                minBidQty = objToString(d?.get("minBidQty")),
-                startDate = objToString(d?.get("startDate")),
-                subscriptionRates = subscriptionRatesDetailsHelper(subscriptionRates),
-                subscriptionUpdatedAt = objToString(d?.get("subscriptionUpdatedAt"))
+                issueSize = getFormattedNumber(objToString(d?.get("issueSize"))),
+            issuePrice = objToString(d?.get("issuePrice")),
+            growwShortName = objToString(d?.get("growwShortName")),
+            documentUrl = objToString(d?.get("documentUrl")),
+            status = objToString(d?.get("status")),
+            aboutCompany = if (aboutCompany != null) AboutCompany(
+                aboutCompany = objToString(aboutCompany["aboutCompany"]),
+                managingDirector = objToString(aboutCompany["managingDirector"]),
+                yearFounded = objToString(aboutCompany["yearFounded"])
+            ) else null,
+            applicationDetails = objToString(d?.get("applicationDetails")),
+            bannerText = objToString(d?.get("bannerText")),
+            companyName = objToString(d?.get("companyName")),
+            companyShortName = objToString(d?.get("companyShortName")),
+            endDate = objToString(d?.get("endDate")),
+            financials = financialsDetailsHelper(financials),
+            issueType = objToString(d?.get("issueType")),
+            listing = Listing(
+                listingPrice = objToString(listing?.get("listingPrice")),
+                listedOn = listedOnDetailsHelper(listing?.get("listedOn"))
+            ),
+            minBidQty = objToString(d?.get("minBidQty")),
+            startDate = objToString(d?.get("startDate")),
+            subscriptionRates = subscriptionRatesDetailsHelper(subscriptionRates),
+            subscriptionUpdatedAt = objToString(d?.get("subscriptionUpdatedAt"))
             )
         } catch (e: Exception) {
             Log.d(
@@ -258,7 +276,7 @@ class Transformer {
                     lead_managers = helperIPOAllotmentsData(data, "lead_managers", first),
                     offer_price = helperIPOAllotmentsData(data, "offer_price", first),
                     REGD_OFF = helperIPOAllotmentsData(data, "REGD_OFF", first),
-                    total_shares = helperIPOAllotmentsData(data, "total_shares", first)
+                    total_shares = getFormattedNumber(helperIPOAllotmentsData(data, "total_shares", first))
                 )
 
 //                Log.d(IPO_LOG_TAG, "final id -> ${availableAllotmentModel.company_id} and se -> ${availableAllotmentModel.COMPANY_SE}")
@@ -273,7 +291,7 @@ class Transformer {
 
     fun searchAllotmentResults(data: String?): SearchAllotmentResultModel? {
 
-//        val data = "<NewDataSet>  <Table>    <higher_priceband>1180</higher_priceband>    <pull>X</pull>    <offer_price>1180</offer_price>    <NAME1>ASHWIN MOORTHY .</NAME1>    <ALLOT>0</ALLOT>    <SHARES>168</SHARES>    <AMTADJ>0</AMTADJ>    <companyname>Sapphire Foods India Limited - IPO</companyname>    <PEMNDG>Retail</PEMNDG>  </Table></NewDataSet>"
+//        val data = "<NewDataSet>  <Table>    <higher_priceband>1180</higher_priceband>    <pull>X</pull>    <offer_price>1180</offer_price>    <NAME1>ASHWIN kumar fucki MOORTHY .</NAME1>    <ALLOT>0</ALLOT>    <SHARES>168</SHARES>    <AMTADJ>0</AMTADJ>    <companyname>Sapphire Foods India Limited - IPO</companyname>    <PEMNDG>Retail</PEMNDG>  </Table></NewDataSet>"
 
         if (data != null && data.length > 12) {
 //            Log.d(IPO_LOG_TAG, "final data -> $data")

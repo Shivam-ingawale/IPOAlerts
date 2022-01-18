@@ -19,7 +19,8 @@ class IPOClient {
 
     private val urlEndPointAllotments: String = "https://linkintime.co.in/MIPO/IPO.aspx/"
     private val urlEndPointIPOCompanyListings = "https://groww.in/v1/api/stocks_ipo/v2/listing/"
-    private val urlEndPointIPOCompanyDetails = "https://groww.in/v1/api/stocks_primary_market_data/v1/ipo/"
+    private val urlEndPointIPOCompanyDetails =
+        "https://groww.in/v1/api/stocks_primary_market_data/v1/ipo/"
 
     private val transformer = Transformer()
 
@@ -39,8 +40,8 @@ class IPOClient {
 
         val ipoAllotmentsApi = RetrofitHelper(urlEndPointAllotments).getInstance()
             .create(IPOAllotments::class.java)
+        val res = ipoAllotmentsApi.getIPOAllotments()
         try {
-            val res = ipoAllotmentsApi.getIPOAllotments()
             Log.d(IPO_LOG_TAG, "getIPOAllotments res -> ${res.toString()}")
             return transformer.getAvailableIPOAllotmentsData(res["d"].asString)
         } catch (e: Exception) {
@@ -70,7 +71,11 @@ class IPOClient {
 //        return null
 //    }
 
-    suspend fun getSearchAllotmentsResults(companyId: String, keyWord: String, userDoc: String): SearchAllotmentResultModel? {
+    suspend fun getSearchAllotmentsResults(
+        companyId: String,
+        keyWord: String,
+        userDoc: String,
+    ): SearchAllotmentResultModel? {
         val searchAllotments = RetrofitHelper(urlEndPointAllotments).getInstance()
             .create(SearchAllotments::class.java)
         val message = APIMessageSearchAllotments(
@@ -105,7 +110,7 @@ class IPOClient {
         return null
     }
 
-    suspend fun getIPOCompanyDetails(searchId:String): IPODetailsModel? {
+    suspend fun getIPOCompanyDetails(searchId: String): IPODetailsModel? {
         val ipoCompanyListings =
             RetrofitHelper(urlEndPointIPOCompanyDetails).getInstance()
                 .create(IPOCompanyDetails::class.java)
@@ -118,7 +123,6 @@ class IPOClient {
         }
         return null
     }
-
 
 
 }
