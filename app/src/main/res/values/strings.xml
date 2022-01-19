@@ -24,4 +24,25 @@
     <string name="applied_for">Applied For:</string>
     <string name="cutoff_price">CutOff Price:</string>
     <string name="no_records_found">No Records Found!!</string>
+    <string name="minimum_price">Min. Investment</string>
+    <string name="ipo_details">IPO Details</string>
+    <string name="ipo_docs">IPO Docs</string>
+    <string name="about_company">About Company</string>
+    <string name="important_dates">Important Dates</string>
+    <string name="listed_on">Listed on</string>
+    <string name="issue_type">Issue Type</string>
+    <string name="open_date">Open Date</string>
+    <string name="close_date">Close Date</string>
+    <string name="listing_date">Listing Date</string>
+    <string name="subscription_rate">Subscription Rate</string>
+    <string name="retail_individual_investor">Retail Individual Investor</string>
+    <string name="non_institutional_investor">Non-Institutional Investor</string>
+    <string name="qualified_institutional_buyers">Qualified Institutional Buyers</string>
+    <string name="revenue">Revenue</string>
+    <string name="year">Year</string>
+    <string name="total_assets">Total Assets</string>
+    <string name="profit">Profit</string>
+    <string name="_2019">2019</string>
+    <string name="_2020">2020</string>
+    <string name="financials">Financials</string>
 </resources>

@@ -24,15 +24,34 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
 
     }
 
+    fun rupeeFormat(value: String): String? {
+        value.replace(",", "")
+        val lastDigit = value[value.length - 1]
+        var result = ""
+        val len = value.length - 1
+        var nDigits = 0
+        for (i in len - 1 downTo 0) {
+            result = value[i].toString() + result
+            nDigits++
+            if (nDigits % 2 == 0 && i > 0) {
+                result = ",$result"
+            }
+        }
+        return result + lastDigit
+    }
+
     inner class ItemAdapterViewHolder(private val binding: IpoCompanyItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Company?) {
             item?.let {
                 binding.companyName.text = it.growwShortName
-                if (it.lotSize != "") {
-                    binding.lotSize.text = it.lotSize
+                if (it.minPrice != "" || it.minBidQuantity != "") {
+                    val s = "₹" + rupeeFormat(((it.minPrice?.toFloat()
+                        ?: 1.0f) * (it.minBidQuantity?.toFloat() ?: 1.0f)).toInt().toString())
+                    binding.minimumPrice.text = s
+
                 } else {
-                    binding.lotSize.text = "N/A"
+                    binding.minimumPrice.text = "N/A"
                 }
 
                 if (it.issueSize != "") {
