@@ -29,4 +29,8 @@
         <item name="cardBackgroundColor">@color/white</item>
     </style>
 
+    <style name="LinkText" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/navbar_bluish</item>
+    </style>
+
 </resources>

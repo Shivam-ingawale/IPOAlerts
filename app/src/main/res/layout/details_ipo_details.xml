@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ipo_details_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:theme="@style/CardBackground"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.6"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/ipo_details_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ipo_details"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--        row 1-->
+
+            <TextView
+                android:id="@+id/minimum_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/ipo_details_text"
+                app:layout_constraintTop_toBottomOf="@id/ipo_details_text" />
+
+
+            <TextView
+                android:id="@+id/minimum_price_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/minimum_price"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/minimum_price"
+                app:layout_constraintTop_toBottomOf="@id/minimum_price" />
+
+            <TextView
+                android:id="@+id/lot_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/minimum_price" />
+
+            <TextView
+                android:id="@+id/lot_size_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/lot_size"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/lot_size"
+                app:layout_constraintTop_toBottomOf="@id/lot_size" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/price_range"
+                app:layout_constraintTop_toBottomOf="@id/minimum_price_text" />
+
+            <!--        row 2-->
+            <TextView
+                android:id="@+id/price_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/ipo_details_text"
+                app:layout_constraintTop_toBottomOf="@id/minimum_price_text" />
+
+
+            <TextView
+                android:id="@+id/price_range_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/price_range"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/price_range"
+                app:layout_constraintTop_toBottomOf="@id/price_range" />
+
+            <TextView
+                android:id="@+id/face_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="210dp"
+                android:maxLines="1"
+                android:text="@string/n_a"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/price_range" />
+
+            <TextView
+                android:id="@+id/face_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/face_value"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/face_value"
+                app:layout_constraintTop_toBottomOf="@id/face_value" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/issue_size"
+                app:layout_constraintTop_toBottomOf="@id/price_range_text" />
+
+            <!--        row 3-->
+
+            <TextView
+                android:id="@+id/issue_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/ipo_details_text"
+                app:layout_constraintTop_toBottomOf="@id/price_range_text" />
+
+
+            <TextView
+                android:id="@+id/issue_size_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/issue_size"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/issue_size"
+                app:layout_constraintTop_toBottomOf="@id/issue_size" />
+
+            <TextView
+                android:id="@+id/ipo_docs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:maxWidth="210dp"
+                android:maxLines="1"
+                android:text="@string/n_a"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:theme="@style/LinkText"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/issue_size" />
+
+            <TextView
+                android:id="@+id/ipo_docs_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/ipo_docs_text"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/ipo_docs"
+                app:layout_constraintTop_toBottomOf="@id/ipo_docs" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/listed_on"
+                app:layout_constraintTop_toBottomOf="@id/issue_size_text" />
+
+            <!--        row 4-->
+
+            <TextView
+                android:id="@+id/listed_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/ipo_details_text"
+                app:layout_constraintTop_toBottomOf="@id/issue_size_text" />
+
+
+            <TextView
+                android:id="@+id/listed_on_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/listed_on"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/listed_on"
+                app:layout_constraintTop_toBottomOf="@id/listed_on" />
+
+            <TextView
+                android:id="@+id/issue_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="210dp"
+                android:maxLines="1"
+                android:text="@string/n_a"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/listed_on" />
+
+            <TextView
+                android:id="@+id/issue_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="05dp"
+                android:text="@string/issue_type"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/issue_type"
+                app:layout_constraintTop_toBottomOf="@id/issue_type" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

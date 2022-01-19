@@ -54,4 +54,7 @@ class DetailsViewModel : ViewModel() {
 //                _currentIPOs.postValue()
         }
     }
+    fun clearData(){
+        _detailsIPOs.postValue(null)
+    }
 }

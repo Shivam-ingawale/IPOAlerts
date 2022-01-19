@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/financials_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:theme="@style/CardBackground"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.6"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/financials_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/financials"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/in_crore"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/financials_text" />
+
+            <!--        row 1-->
+
+            <TextView
+                android:id="@+id/year_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/year"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/revenue_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/financials_text" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/revenue_text"
+                app:layout_constraintStart_toEndOf="@id/year_text"
+                app:layout_constraintTop_toTopOf="@+id/year_text" />
+
+            <TextView
+                android:id="@+id/revenue_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/revenue"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
+                app:layout_constraintStart_toEndOf="@id/year_text"
+                app:layout_constraintTop_toTopOf="@id/year_text" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/total_assets_text"
+                app:layout_constraintStart_toEndOf="@id/revenue_text"
+                app:layout_constraintTop_toTopOf="@+id/year_text" />
+
+            <TextView
+                android:id="@+id/total_assets_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_assets"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/profit_text"
+                app:layout_constraintStart_toEndOf="@id/revenue_text"
+                app:layout_constraintTop_toTopOf="@id/revenue_text" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/profit_text"
+                app:layout_constraintStart_toEndOf="@id/total_assets_text"
+                app:layout_constraintTop_toTopOf="@+id/year_text" />
+
+            <TextView
+                android:id="@+id/profit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profit"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/total_assets_text"
+                app:layout_constraintTop_toTopOf="@id/total_assets_text" />
+
+            <!--                row 2-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/year_2019"
+                app:layout_constraintTop_toBottomOf="@id/year_text" />
+
+            <TextView
+                android:id="@+id/year_2019"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_2019"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/revenue_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/year_text" />
+
+            <TextView
+                android:id="@+id/revenue_2019"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
+                app:layout_constraintStart_toEndOf="@id/year_text"
+                app:layout_constraintTop_toTopOf="@id/year_2019" />
+
+
+            <TextView
+                android:id="@+id/total_assets_2019"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/profit_text"
+                app:layout_constraintStart_toEndOf="@id/revenue_text"
+                app:layout_constraintTop_toTopOf="@id/year_2019" />
+
+
+            <TextView
+                android:id="@+id/profit_2019"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+                android:textSize="14sp"
+
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/total_assets_text"
+                app:layout_constraintTop_toTopOf="@id/year_2019" />
+
+
+            <!--                2-->
+            <!--                row 2-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/year_2021"
+                app:layout_constraintTop_toBottomOf="@id/year_2020" />
+
+            <TextView
+                android:id="@+id/year_2021"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_2021"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/revenue_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/year_2020" />
+
+            <TextView
+                android:id="@+id/revenue_2021"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/n_a"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
+                app:layout_constraintStart_toEndOf="@id/year_text"
+                app:layout_constraintTop_toTopOf="@id/year_2021" />
+
+
+            <TextView
+                android:id="@+id/total_assets_2021"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/profit_text"
+                app:layout_constraintStart_toEndOf="@id/revenue_text"
+                app:layout_constraintTop_toTopOf="@id/year_2021" />
+
+
+            <TextView
+                android:id="@+id/profit_2021"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/total_assets_text"
+                app:layout_constraintTop_toTopOf="@id/year_2021" />
+
+            <!--                row 2-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/year_2020"
+                app:layout_constraintTop_toBottomOf="@id/year_2019" />
+
+            <TextView
+                android:id="@+id/year_2020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/_2020"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/revenue_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/year_2019" />
+
+            <TextView
+                android:id="@+id/revenue_2020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
+                app:layout_constraintStart_toEndOf="@id/year_text"
+                app:layout_constraintTop_toTopOf="@id/year_2020" />
+
+
+            <TextView
+                android:id="@+id/total_assets_2020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toStartOf="@+id/profit_text"
+                app:layout_constraintStart_toEndOf="@id/revenue_text"
+                app:layout_constraintTop_toTopOf="@id/year_2020" />
+
+
+            <TextView
+                android:id="@+id/profit_2020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n_a"
+                android:textSize="14sp"
+
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/total_assets_text"
+                app:layout_constraintTop_toTopOf="@id/year_2020" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

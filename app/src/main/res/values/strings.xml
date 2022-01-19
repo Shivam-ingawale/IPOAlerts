@@ -26,7 +26,8 @@
     <string name="no_records_found">No Records Found!!</string>
     <string name="minimum_price">Min. Investment</string>
     <string name="ipo_details">IPO Details</string>
-    <string name="ipo_docs">IPO Docs</string>
+    <string name="ipo_docs">Docs📂</string>
+    <string name="ipo_docs_text">IPO Docs</string>
     <string name="about_company">About Company</string>
     <string name="important_dates">Important Dates</string>
     <string name="listed_on">Listed on</string>
@@ -45,4 +46,10 @@
     <string name="_2019">2019</string>
     <string name="_2020">2020</string>
     <string name="financials">Financials</string>
+    <string name="managing_director">Managing Director</string>
+    <string name="founded">Founded</string>
+    <string name="parent_organisation">Parent Organisation</string>
+    <string name="_2021">2021</string>
+    <string name="in_crore">all values in Crore</string>
+    <string name="n_a">N/A</string>
 </resources>

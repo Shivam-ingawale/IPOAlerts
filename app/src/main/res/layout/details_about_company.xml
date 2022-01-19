@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/about_company_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:theme="@style/CardBackground"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/about_company_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_company"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--        row 1-->
+
+            <TextView
+                android:id="@+id/managing_director_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/managing_director"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/about_company_text"
+                app:layout_constraintTop_toBottomOf="@id/about_company_text" />
+
+            <TextView
+                android:id="@+id/managing_director"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxWidth="160dp"
+                android:maxLines="1"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/managing_director_text"
+                app:layout_constraintStart_toEndOf="@id/guideline5"
+                app:layout_constraintTop_toTopOf="@id/managing_director_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/founded_text"
+                app:layout_constraintTop_toBottomOf="@id/managing_director_text" />
+            <!--                2-->
+            <TextView
+                android:id="@+id/founded_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/founded"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/about_company_text"
+                app:layout_constraintTop_toBottomOf="@id/managing_director_text" />
+
+            <TextView
+                android:id="@+id/founded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxWidth="160dp"
+                android:maxLines="1"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/founded_text"
+                app:layout_constraintStart_toEndOf="@id/guideline5"
+                app:layout_constraintTop_toTopOf="@id/founded_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/parent_organisation_text"
+                app:layout_constraintTop_toBottomOf="@+id/founded_text" />
+            <!--                3-->
+            <TextView
+                android:id="@+id/parent_organisation_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/parent_organisation"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/about_company_text"
+                app:layout_constraintTop_toBottomOf="@id/founded_text" />
+
+            <TextView
+                android:id="@+id/parent_organisation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxWidth="160dp"
+                android:maxLines="1"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/parent_organisation_text"
+                app:layout_constraintStart_toEndOf="@id/guideline5"
+                app:layout_constraintTop_toTopOf="@id/parent_organisation_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:theme="@style/CollapsingToolbarLayoutTheme"
+                app:layout_constraintBottom_toTopOf="@id/about_company_description"
+                app:layout_constraintTop_toBottomOf="@id/parent_organisation_text" />
+
+
+            <TextView
+                android:id="@+id/about_company_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/no_data_available"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/about_company_text"
+                app:layout_constraintTop_toBottomOf="@id/parent_organisation_text" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

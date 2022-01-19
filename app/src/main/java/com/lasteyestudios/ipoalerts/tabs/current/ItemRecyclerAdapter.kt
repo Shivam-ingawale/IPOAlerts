@@ -37,7 +37,11 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
                 result = ",$result"
             }
         }
-        return result + lastDigit
+        val temp =result + lastDigit
+        if(temp!=null){
+            return "₹$temp"
+        }
+        return temp
     }
 
     inner class ItemAdapterViewHolder(private val binding: IpoCompanyItemBinding) :
@@ -46,7 +50,7 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
             item?.let {
                 binding.companyName.text = it.growwShortName
                 if (it.minPrice != "" || it.minBidQuantity != "") {
-                    val s = "₹" + rupeeFormat(((it.minPrice?.toFloat()
+                    val s = rupeeFormat(((it.minPrice?.toFloat()
                         ?: 1.0f) * (it.minBidQuantity?.toFloat() ?: 1.0f)).toInt().toString())
                     binding.minimumPrice.text = s
 

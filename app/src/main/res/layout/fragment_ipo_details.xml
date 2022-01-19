@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,833 +7,125 @@
     android:fitsSystemWindows="true"
     tools:context=".tabs.details.DetailsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1500dp">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/logo_image_card"
-            style="@style/CardImageBackground"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/logo_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/logo_image_card"
+                style="@style/CardImageBackground"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="15dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/logo_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:contentDescription="@string/about_company"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:layout_marginTop="50dp"
+                android:ellipsize="end"
+                android:gravity="center|bottom"
+                android:maxWidth="210dp"
+                android:maxLines="2"
+                android:text="@string/no_data_available"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/logo_image_card"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/company_name"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_marginTop="50dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxWidth="210dp"
-            android:maxLines="2"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/logo_image_card"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="company_name dfbdfb name 363636363636363636" />
+            <TextView
+                android:id="@+id/company_official_name"
+                android:layout_width="wrap_content"
+                android:layout_height="036dp"
+                android:layout_marginTop="20dp"
+                android:ellipsize="end"
+                android:gravity="center|top"
+                android:maxWidth="190dp"
+                android:maxLines="2"
+                android:text="@string/no_data_available"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/logo_image_card"
+                app:layout_constraintTop_toBottomOf="@id/company_name" />
 
-        <TextView
-            android:id="@+id/company_official_name"
-            android:layout_width="wrap_content"
-            android:layout_height="036dp"
-            android:layout_marginTop="20dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxWidth="190dp"
-            android:maxLines="2"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/logo_image_card"
-            app:layout_constraintTop_toBottomOf="@id/company_name"
-            tools:text="company_name dfbdfb named fbdfb name 36363636" />
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/important_dates_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:theme="@style/CardBackground"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logo_image_card">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/details_important_dates"
+                layout="@layout/details_important_dates"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintGuide_percent="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/important_dates_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/important_dates"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--        row 1-->
-
-                <TextView
-                    android:id="@+id/open_date_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/open_date"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/important_dates_text"
-                    app:layout_constraintTop_toBottomOf="@id/important_dates_text" />
-
-                <TextView
-                    android:id="@+id/open_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/open_date_text"
-                    app:layout_constraintStart_toEndOf="@id/guideline2"
-                    app:layout_constraintTop_toTopOf="@id/open_date_text"
-                    tools:text="2021-12-23" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toBottomOf="@id/close_date_text"
-                    app:layout_constraintTop_toTopOf="@id/open_date_text" />
-                <!--                2-->
-                <TextView
-                    android:id="@+id/close_date_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/close_date"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/important_dates_text"
-                    app:layout_constraintTop_toBottomOf="@id/open_date_text" />
-
-                <TextView
-                    android:id="@+id/close_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/close_date_text"
-                    app:layout_constraintStart_toEndOf="@id/guideline2"
-                    app:layout_constraintTop_toTopOf="@id/close_date_text"
-                    tools:text="2021-12-23" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toBottomOf="@id/listing_date_text"
-                    app:layout_constraintTop_toTopOf="@id/close_date_text" />
-                <!--                3-->
-                <TextView
-                    android:id="@+id/listing_date_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/listing_date"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/important_dates_text"
-                    app:layout_constraintTop_toBottomOf="@id/close_date_text" />
-
-                <TextView
-                    android:id="@+id/listing_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/listing_date_text"
-                    app:layout_constraintStart_toEndOf="@id/guideline2"
-                    app:layout_constraintTop_toTopOf="@id/listing_date_text"
-                    tools:text="2021-12-23" />
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/logo_image_card" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/ipo_details_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:theme="@style/CardBackground"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/important_dates_card">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/details_ipo_details"
+                layout="@layout/details_ipo_details"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/details_important_dates" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintGuide_percent="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/ipo_details_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ipo_details"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--        row 1-->
-
-                <TextView
-                    android:id="@+id/minimum_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/ipo_details_text"
-                    app:layout_constraintTop_toBottomOf="@id/ipo_details_text"
-                    tools:text="20002" />
-
-
-                <TextView
-                    android:id="@+id/minimum_price_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/minimum_price"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/minimum_price"
-                    app:layout_constraintTop_toBottomOf="@id/minimum_price" />
-
-                <TextView
-                    android:id="@+id/lot_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/minimum_price"
-                    tools:text="200" />
-
-                <TextView
-                    android:id="@+id/lot_size_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/lot_size"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/lot_size"
-                    app:layout_constraintTop_toBottomOf="@id/lot_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toTopOf="@id/price_range"
-                    app:layout_constraintTop_toBottomOf="@id/minimum_price_text" />
-
-                <!--        row 2-->
-                <TextView
-                    android:id="@+id/price_range"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/ipo_details_text"
-                    app:layout_constraintTop_toBottomOf="@id/minimum_price_text"
-                    tools:text="50 - 52" />
-
-
-                <TextView
-                    android:id="@+id/price_range_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/price_range"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/price_range"
-                    app:layout_constraintTop_toBottomOf="@id/price_range" />
-
-                <TextView
-                    android:id="@+id/face_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="210dp"
-                    android:maxLines="1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/price_range"
-                    tools:text="10" />
-
-                <TextView
-                    android:id="@+id/face_value_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/face_value"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/face_value"
-                    app:layout_constraintTop_toBottomOf="@id/face_value" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toTopOf="@id/issue_size"
-                    app:layout_constraintTop_toBottomOf="@id/price_range_text" />
-
-                <!--        row 3-->
-
-                <TextView
-                    android:id="@+id/issue_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/ipo_details_text"
-                    app:layout_constraintTop_toBottomOf="@id/face_value_text"
-                    tools:text="5000Cr" />
-
-
-                <TextView
-                    android:id="@+id/issue_size_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/issue_size"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/issue_size"
-                    app:layout_constraintTop_toBottomOf="@id/issue_size" />
-
-                <TextView
-                    android:id="@+id/ipo_docs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="210dp"
-                    android:maxLines="1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/issue_size"
-                    tools:text="Docs" />
-
-                <TextView
-                    android:id="@+id/ipo_docs_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/ipo_docs"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/ipo_docs"
-                    app:layout_constraintTop_toBottomOf="@id/ipo_docs" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toTopOf="@id/listed_on"
-                    app:layout_constraintTop_toBottomOf="@id/issue_size_text" />
-
-                <!--        row 4-->
-
-                <TextView
-                    android:id="@+id/listed_on"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/ipo_details_text"
-                    app:layout_constraintTop_toBottomOf="@id/issue_size_text"
-                    tools:text="NSE and BSE" />
-
-
-                <TextView
-                    android:id="@+id/listed_on_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/listed_on"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/listed_on"
-                    app:layout_constraintTop_toBottomOf="@id/listed_on" />
-
-                <TextView
-                    android:id="@+id/issue_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="210dp"
-                    android:maxLines="1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/listed_on"
-                    tools:text="EQUITY" />
-
-                <TextView
-                    android:id="@+id/issue_type_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="05dp"
-                    android:text="@string/issue_type"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/issue_type"
-                    app:layout_constraintTop_toBottomOf="@id/issue_type" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!--        2 section-->
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/subscription_rate_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:theme="@style/CardBackground"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ipo_details_card">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/details_subscription_rate"
+                layout="@layout/details_subscription_rate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/details_ipo_details" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintGuide_percent="0.6"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/subscription_rate_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/subscription_rate"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--        row 1-->
-
-                <TextView
-                    android:id="@+id/retail_individual_investor_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/retail_individual_investor"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/subscription_rate_text"
-                    app:layout_constraintTop_toBottomOf="@id/subscription_rate_text" />
-
-                <TextView
-                    android:id="@+id/retail_individual_investor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/retail_individual_investor_text"
-                    app:layout_constraintStart_toEndOf="@id/guideline3"
-                    app:layout_constraintTop_toTopOf="@id/retail_individual_investor_text"
-                    tools:text="2021-12-23" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toBottomOf="@id/non_institutional_investor_text"
-                    app:layout_constraintTop_toTopOf="@id/retail_individual_investor_text" />
-                <!--                2-->
-                <TextView
-                    android:id="@+id/non_institutional_investor_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/non_institutional_investor"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/subscription_rate_text"
-                    app:layout_constraintTop_toBottomOf="@id/retail_individual_investor_text" />
-
-                <TextView
-                    android:id="@+id/non_institutional_investor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/non_institutional_investor_text"
-                    app:layout_constraintStart_toEndOf="@id/guideline3"
-                    app:layout_constraintTop_toTopOf="@id/non_institutional_investor_text"
-                    tools:text="2021-12-23" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toBottomOf="@id/qualified_institutional_buyers_text"
-                    app:layout_constraintTop_toTopOf="@id/non_institutional_investor_text" />
-                <!--                3-->
-                <TextView
-                    android:id="@+id/qualified_institutional_buyers_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/qualified_institutional_buyers"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/subscription_rate_text"
-                    app:layout_constraintTop_toBottomOf="@id/non_institutional_investor_text" />
-
-                <TextView
-                    android:id="@+id/qualified_institutional_buyers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/qualified_institutional_buyers_text"
-                    app:layout_constraintStart_toEndOf="@id/guideline3"
-                    app:layout_constraintTop_toTopOf="@id/qualified_institutional_buyers_text"
-                    tools:text="2021-12-23" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/financials_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:theme="@style/CardBackground"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subscription_rate_card">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/details_financials"
+                layout="@layout/details_financials"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/details_subscription_rate" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintGuide_percent="0.6"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <include
+                android:id="@+id/details_about_company"
+                layout="@layout/details_about_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_financials" />
 
-                <TextView
-                    android:id="@+id/financials_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/financials"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!--        row 1-->
-
-                <TextView
-                    android:id="@+id/year_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/year"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/revenue_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/financials_text" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/revenue_text"
-                    app:layout_constraintStart_toEndOf="@id/year_text"
-                    app:layout_constraintTop_toTopOf="@+id/year_text" />
-
-                <TextView
-                    android:id="@+id/revenue_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/revenue"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
-                    app:layout_constraintStart_toEndOf="@id/year_text"
-                    app:layout_constraintTop_toTopOf="@id/year_text" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/total_assets_text"
-                    app:layout_constraintStart_toEndOf="@id/revenue_text"
-                    app:layout_constraintTop_toTopOf="@+id/year_text" />
-
-                <TextView
-                    android:id="@+id/total_assets_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_assets"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/profit_text"
-                    app:layout_constraintStart_toEndOf="@id/revenue_text"
-                    app:layout_constraintTop_toTopOf="@id/revenue_text" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/profit_text"
-                    app:layout_constraintStart_toEndOf="@id/total_assets_text"
-                    app:layout_constraintTop_toTopOf="@+id/year_text" />
-
-                <TextView
-                    android:id="@+id/profit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profit"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/total_assets_text"
-                    app:layout_constraintTop_toTopOf="@id/total_assets_text" />
-
-                <!--                row 2-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toTopOf="@id/year_2019"
-                    app:layout_constraintTop_toBottomOf="@id/year_text" />
-
-                <TextView
-                    android:id="@+id/year_2019"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/_2019"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/revenue_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/year_text" />
-
-                <TextView
-                    android:id="@+id/revenue_2019"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
-                    app:layout_constraintStart_toEndOf="@id/year_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2019"
-                    tools:text="201" />
-
-
-                <TextView
-                    android:id="@+id/total_assets_2019"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-
-                    app:layout_constraintEnd_toStartOf="@+id/profit_text"
-                    app:layout_constraintStart_toEndOf="@id/revenue_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2019"
-                    tools:text="201" />
-
-
-                <TextView
-                    android:id="@+id/profit_2019"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/total_assets_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2019"
-                    tools:text="201" />
-
-
-                <!--                2-->
-                <!--                row 2-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toTopOf="@id/year_2021"
-                    app:layout_constraintTop_toBottomOf="@id/year_2020" />
-
-                <TextView
-                    android:id="@+id/year_2021"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/_2020"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/revenue_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/year_2020" />
-
-                <TextView
-                    android:id="@+id/revenue_2021"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
-                    app:layout_constraintStart_toEndOf="@id/year_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2021"
-                    tools:text="201" />
-
-
-                <TextView
-                    android:id="@+id/total_assets_2021"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-
-                    app:layout_constraintEnd_toStartOf="@+id/profit_text"
-                    app:layout_constraintStart_toEndOf="@id/revenue_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2021"
-                    tools:text="201" />
-
-
-                <TextView
-                    android:id="@+id/profit_2021"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/total_assets_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2021"
-                    tools:text="201" />
-
-                <!--                row 2-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:theme="@style/CollapsingToolbarLayoutTheme"
-                    app:layout_constraintBottom_toTopOf="@id/year_2020"
-                    app:layout_constraintTop_toBottomOf="@id/year_2019" />
-
-                <TextView
-                    android:id="@+id/year_2020"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/_2020"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/revenue_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/year_2019" />
-
-                <TextView
-                    android:id="@+id/revenue_2020"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/total_assets_text"
-                    app:layout_constraintStart_toEndOf="@id/year_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2020"
-                    tools:text="201" />
-
-
-                <TextView
-                    android:id="@+id/total_assets_2020"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-
-                    app:layout_constraintEnd_toStartOf="@+id/profit_text"
-                    app:layout_constraintStart_toEndOf="@id/revenue_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2020"
-                    tools:text="201" />
-
-
-                <TextView
-                    android:id="@+id/profit_2020"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/total_assets_text"
-                    app:layout_constraintTop_toTopOf="@id/year_2020"
-                    tools:text="201" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1000dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+    </ScrollView>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/retry_allotment_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:elevation="3dp"
+        android:focusable="true"
+        android:text="@string/retry"
+        app:icon="@drawable/ic_reload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

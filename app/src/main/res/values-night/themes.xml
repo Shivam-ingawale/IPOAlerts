@@ -28,6 +28,9 @@
         <item name="android:background">@color/white</item>
         <item name="cardBackgroundColor">@color/white</item>
     </style>
+    <style name="LinkText" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/gold</item>
+    </style>
 
 
 </resources>

@@ -18,11 +18,16 @@
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout-v26/fragment_search_allotment.xml" value="0.2484375" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/allotment_item.xml" value="0.264" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/details_about_company.xml" value="0.4" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/details_financials.xml" value="0.4" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/details_important_dates.xml" value="0.2484375" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/details_ipo_details.xml" value="0.4" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/details_subscription_rate.xml" value="0.2484375" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_allotment.xml" value="0.176" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_blank.xml" value="0.2484375" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_current.xml" value="0.264" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_ipo.xml" value="0.2484375" />
-        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_ipo_details.xml" value="0.326265389876881" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_ipo_details.xml" value="0.136" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_listed.xml" value="0.2484375" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_search_allotment.xml" value="0.264" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_watch_list.xml" value="0.2484375" />

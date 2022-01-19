@@ -25,9 +25,9 @@ class Transformer {
         } else {
             val temp = count.toLong()
             if (temp < 1000) return "" + temp
-            if (temp < 100000) return "" + temp/1000+"k"
-            if (temp < 10000000) return "" + temp/100000+"Lac"
-            return "" + temp/10000000+"Cr"
+            if (temp < 100000) return "" + temp / 1000 + "k"
+            if (temp < 10000000) return "" + temp / 100000 + "Lac"
+            return "" + temp / 10000000 + "Cr"
         }
     }
 
@@ -205,30 +205,31 @@ class Transformer {
                 logoUrl = objToString(d?.get("logoUrl")),
                 listingDate = objToString(d?.get("listingDate")),
                 issueSize = getFormattedNumber(objToString(d?.get("issueSize"))),
-            issuePrice = objToString(d?.get("issuePrice")),
-            growwShortName = objToString(d?.get("growwShortName")),
-            documentUrl = objToString(d?.get("documentUrl")),
-            status = objToString(d?.get("status")),
-            aboutCompany = if (aboutCompany != null) AboutCompany(
-                aboutCompany = objToString(aboutCompany["aboutCompany"]),
-                managingDirector = objToString(aboutCompany["managingDirector"]),
-                yearFounded = objToString(aboutCompany["yearFounded"])
-            ) else null,
-            applicationDetails = objToString(d?.get("applicationDetails")),
-            bannerText = objToString(d?.get("bannerText")),
-            companyName = objToString(d?.get("companyName")),
-            companyShortName = objToString(d?.get("companyShortName")),
-            endDate = objToString(d?.get("endDate")),
-            financials = financialsDetailsHelper(financials),
-            issueType = objToString(d?.get("issueType")),
-            listing = Listing(
-                listingPrice = objToString(listing?.get("listingPrice")),
-                listedOn = listedOnDetailsHelper(listing?.get("listedOn"))
-            ),
-            minBidQty = objToString(d?.get("minBidQty")),
-            startDate = objToString(d?.get("startDate")),
-            subscriptionRates = subscriptionRatesDetailsHelper(subscriptionRates),
-            subscriptionUpdatedAt = objToString(d?.get("subscriptionUpdatedAt"))
+                issuePrice = objToString(d?.get("issuePrice")),
+                growwShortName = objToString(d?.get("growwShortName")),
+                documentUrl = objToString(d?.get("documentUrl")),
+                status = objToString(d?.get("status")),
+                aboutCompany = if (aboutCompany != null) AboutCompany(
+                    aboutCompany = objToString(aboutCompany["aboutCompany"]),
+                    managingDirector = objToString(aboutCompany["managingDirector"]),
+                    yearFounded = objToString(aboutCompany["yearFounded"])
+                ) else null,
+                applicationDetails = objToString(d?.get("applicationDetails")),
+                bannerText = objToString(d?.get("bannerText")),
+                companyName = objToString(d?.get("companyName")),
+                companyShortName = objToString(d?.get("companyShortName")),
+                endDate = objToString(d?.get("endDate")),
+                financials = financialsDetailsHelper(financials),
+                issueType = objToString(d?.get("issueType")),
+                listing = Listing(
+                    listingPrice = objToString(listing?.get("listingPrice")),
+                    listedOn = listedOnDetailsHelper(listing?.get("listedOn"))
+                ),
+                minBidQty = objToString(d?.get("minBidQty")),
+                startDate = objToString(d?.get("startDate")),
+                subscriptionRates = subscriptionRatesDetailsHelper(subscriptionRates),
+                subscriptionUpdatedAt = objToString(d?.get("subscriptionUpdatedAt")),
+                faceValue = objToString(d?.get("faceValue"))
             )
         } catch (e: Exception) {
             Log.d(
@@ -276,7 +277,9 @@ class Transformer {
                     lead_managers = helperIPOAllotmentsData(data, "lead_managers", first),
                     offer_price = helperIPOAllotmentsData(data, "offer_price", first),
                     REGD_OFF = helperIPOAllotmentsData(data, "REGD_OFF", first),
-                    total_shares = getFormattedNumber(helperIPOAllotmentsData(data, "total_shares", first))
+                    total_shares = getFormattedNumber(helperIPOAllotmentsData(data,
+                        "total_shares",
+                        first))
                 )
 
 //                Log.d(IPO_LOG_TAG, "final id -> ${availableAllotmentModel.company_id} and se -> ${availableAllotmentModel.COMPANY_SE}")

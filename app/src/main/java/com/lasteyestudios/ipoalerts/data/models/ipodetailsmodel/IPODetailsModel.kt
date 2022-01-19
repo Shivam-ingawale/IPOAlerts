@@ -25,5 +25,6 @@ data class IPODetailsModel(
     val status: String?,
     val subscriptionRates: List<SubscriptionRate?>?,
     val subscriptionUpdatedAt: String?,
-    val symbol: String?
+    val symbol: String?,
+    val faceValue: String?
 )
