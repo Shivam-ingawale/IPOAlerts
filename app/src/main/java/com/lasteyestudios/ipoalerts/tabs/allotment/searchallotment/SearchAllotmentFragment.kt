@@ -19,12 +19,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.lasteyestudios.ipoalerts.R
 import com.lasteyestudios.ipoalerts.data.models.Response.*
 import com.lasteyestudios.ipoalerts.databinding.FragmentSearchAllotmentBinding
 import com.lasteyestudios.ipoalerts.utils.BETTER_LUCK_NEXT_TIME
 import com.lasteyestudios.ipoalerts.utils.HAPPY_GIF
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 import com.lasteyestudios.ipoalerts.utils.SAD_GIF
+
 
 class SearchAllotmentFragment : Fragment() {
     private var _binding: FragmentSearchAllotmentBinding? = null
@@ -91,12 +94,23 @@ class SearchAllotmentFragment : Fragment() {
                         } else {
                             myResponse.data.let {
                                 binding.totalScreen.visibility = View.VISIBLE
-                                binding.resultCard.visibility = View.VISIBLE
                                 binding.allotText.visibility = View.VISIBLE
                                 binding.amtAdjText.visibility = View.VISIBLE
                                 binding.appliedForText.visibility = View.VISIBLE
                                 binding.cutoffPriceText.visibility = View.VISIBLE
                                 binding.nameText.visibility = View.VISIBLE
+
+                                binding.noRecordsFound.visibility = View.GONE
+
+                                binding.allot.visibility = View.VISIBLE
+                                binding.amtAdj.visibility = View.VISIBLE
+                                binding.appliedFor.visibility = View.VISIBLE
+                                binding.cutoffPrice.visibility = View.VISIBLE
+                                binding.name.visibility = View.VISIBLE
+
+
+
+
                                 binding.allot.text = it.ALLOT
                                 binding.name.text = it.NAME1
                                 binding.amtAdj.text = it.AMTADJ
@@ -106,6 +120,7 @@ class SearchAllotmentFragment : Fragment() {
                                     Glide.with(binding.allotmentMeme.context).load(HAPPY_GIF)
                                         .fitCenter()
                                         .into(binding.allotmentMeme)
+                                    googleReview()
                                 } else {
                                     Glide.with(binding.allotmentMeme.context)
                                         .load(BETTER_LUCK_NEXT_TIME)
@@ -120,7 +135,7 @@ class SearchAllotmentFragment : Fragment() {
         })
         binding.totalScreen.setOnClickListener {
             Log.d(IPO_LOG_TAG, "totalScreen clicked")
-            binding.resultCard.visibility = View.GONE
+            searchAllotmentViewModel.clearData()
             binding.totalScreen.visibility = View.GONE
         }
 
@@ -202,9 +217,23 @@ class SearchAllotmentFragment : Fragment() {
 
 
     private fun noRecordsFound() {
+
+        binding.allotText.visibility = View.GONE
+        binding.amtAdjText.visibility = View.GONE
+        binding.appliedForText.visibility = View.GONE
+        binding.cutoffPriceText.visibility = View.GONE
+        binding.nameText.visibility = View.GONE
+
+
+        binding.allot.visibility = View.GONE
+        binding.amtAdj.visibility = View.GONE
+        binding.appliedFor.visibility = View.GONE
+        binding.cutoffPrice.visibility = View.GONE
+        binding.name.visibility = View.GONE
+
+
         hideKeyboard()
         binding.totalScreen.visibility = View.VISIBLE
-        binding.resultCard.visibility = View.VISIBLE
         Glide.with(binding.allotmentMeme.context).load(SAD_GIF)
             .centerCrop()
             .into(binding.allotmentMeme)
@@ -212,10 +241,52 @@ class SearchAllotmentFragment : Fragment() {
 
     }
 
+    private fun googleReview() {
+        //todo set this
+        hideKeyboard()
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val alreadyRated = sharedPref.getBoolean(getString(R.string.app_rated), false)
+//        val alreadyRated = false
+
+        if (alreadyRated) {
+            return
+        }
+        binding.reviewFab.apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                Log.d(IPO_LOG_TAG, "googleReview clicked")
+                val manager = ReviewManagerFactory.create(requireContext())
+                val request = manager.requestReviewFlow()
+                request.addOnCompleteListener { request ->
+                    if (request.isSuccessful) {
+                        // We got the ReviewInfo object
+                        val reviewInfo = request.result
+                        val flow = manager.launchReviewFlow(requireActivity(), reviewInfo)
+                        flow.addOnCompleteListener {
+                            Log.d(IPO_LOG_TAG, "googleReview done")
+
+                            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                                ?: return@addOnCompleteListener
+                            with(sharedPref.edit()) {
+                                putBoolean(getString(R.string.app_rated), true)
+                                apply()
+                            }
+
+                            visibility = View.GONE
+                        }
+                    }
+                }
+
+            }
+        }
+
+//        binding.reviewFab.visibility = View.GONE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         searchAllotmentViewModel.clearData()
-        binding.resultCard.visibility = View.GONE
+        binding.totalScreen.visibility = View.GONE
         Log.d(IPO_LOG_TAG, "onDestroyView clicked")
         _binding = null
     }

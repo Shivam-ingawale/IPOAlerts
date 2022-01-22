@@ -21,7 +21,9 @@
     </style>
     <!-- Card View-->
     <style name="CardBackground" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:background">@color/grey</item>
+<!--        <item name="android:background">@color/grey</item>-->
+        <item name="backgroundColor">@color/gold</item>
+        <item name="android:background">@drawable/card_gradient_night</item>
     </style>
 
     <style name="CardImageBackground" parent="Theme.MaterialComponents.DayNight.NoActionBar">

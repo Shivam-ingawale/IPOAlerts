@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/allotment_card"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:theme="@style/CardBackground"
@@ -34,24 +34,25 @@
                 android:layout_marginEnd="25dp"
                 android:autoSizeTextType="uniform"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxWidth="300dp"
                 android:maxLines="2"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:targetApi="o"
-                tools:text="Sapphire Foods India Limited - IPO " />
+                tools:text="Sapphire   India  India  ed - IPO " />
 
             <TextView
                 android:id="@+id/closing_date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/closing_date"
-                android:textSize="18sp"
+                android:layout_marginStart="-20dp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/company_name" />
@@ -63,10 +64,8 @@
                 android:layout_marginTop="8dp"
                 android:maxWidth="120dp"
                 android:maxLines="1"
-                android:textSize="20sp"
-
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/closing_date_text"
                 app:layout_constraintStart_toStartOf="@id/closing_date_text"
                 app:layout_constraintTop_toBottomOf="@+id/closing_date_text"
                 tools:text="2022-01-05T00:00:00+05:30" />
@@ -76,8 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price_range"
-
-                android:textSize="18sp"
+                android:layout_marginStart="-20dp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/company_name"
@@ -90,9 +89,8 @@
                 android:layout_marginTop="8dp"
                 android:maxWidth="120dp"
                 android:maxLines="1"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/price_range_text"
                 app:layout_constraintStart_toStartOf="@id/price_range_text"
                 app:layout_constraintTop_toBottomOf="@id/price_range_text"
                 tools:text="105555555555555555555555555555555" />
@@ -102,10 +100,9 @@
                 android:id="@+id/issue_size_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="45dp"
                 android:text="@string/issue_size"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/secretary_text"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/closing_date_text"
                 app:layout_constraintTop_toBottomOf="@id/closing_date_text" />
 
@@ -116,9 +113,8 @@
                 android:layout_marginTop="8dp"
                 android:maxWidth="120dp"
                 android:maxLines="1"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/issue_size_text"
                 app:layout_constraintStart_toStartOf="@id/issue_size_text"
                 app:layout_constraintTop_toBottomOf="@id/issue_size_text"
                 tools:text="868000" />
@@ -129,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:text="@string/face_value"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/price_range_text"
                 app:layout_constraintTop_toTopOf="@id/issue_size_text" />
 
@@ -140,9 +136,8 @@
                 android:layout_marginTop="8dp"
                 android:maxWidth="120dp"
                 android:maxLines="1"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/face_value_text"
                 app:layout_constraintStart_toStartOf="@id/face_value_text"
                 app:layout_constraintTop_toBottomOf="@id/face_value_text"
                 tools:text="26" />
@@ -153,28 +148,28 @@
                 android:id="@+id/secretary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginTop="45dp"
                 android:text="@string/secretary"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/closing_date_text"
                 app:layout_constraintTop_toBottomOf="@id/issue_size_text" />
 
             <TextView
                 android:id="@+id/secretary"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginEnd="20dp"
                 android:ellipsize="end"
-                android:maxWidth="170dp"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/secretary_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="15dp"
                 app:layout_constraintStart_toEndOf="@id/secretary_text"
                 app:layout_constraintTop_toTopOf="@id/secretary_text"
-                tools:text="Kannu Sharma 1111 111 11111111111 11111111111111111 1111111111111111111111111" />
+                tools:text="Kannu Sharma 1111 1 11 11 11 1111 111 11111111111111111 1111111111111111111111111" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

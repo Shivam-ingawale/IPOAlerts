@@ -27,6 +27,7 @@
     <string name="minimum_price">Min. Investment</string>
     <string name="ipo_details">IPO Details</string>
     <string name="ipo_docs">Docs📂</string>
+    <string name="app_rated">APP_RATED</string>
     <string name="ipo_docs_text">IPO Docs</string>
     <string name="about_company">About Company</string>
     <string name="important_dates">Important Dates</string>
@@ -52,4 +53,10 @@
     <string name="_2021">2021</string>
     <string name="in_crore">all values in Crore</string>
     <string name="n_a">N/A</string>
+    <string name="rate_our_app">Rate Our App</string>
+    <string name="back">Back</string>
+    <string name="listing_details">Listing Details</string>
+    <string name="issue_price">Issue Price</string>
+    <string name="listing_price">Listing Price</string>
+    <string name="listing_gains">Listing Gains</string>
 </resources>

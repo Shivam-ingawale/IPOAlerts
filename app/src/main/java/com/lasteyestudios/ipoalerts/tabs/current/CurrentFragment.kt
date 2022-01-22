@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.lasteyestudios.ipoalerts.data.models.Response
 import com.lasteyestudios.ipoalerts.databinding.FragmentIpoBinding
 import com.lasteyestudios.ipoalerts.tabs.common.SharedViewModel
-import com.lasteyestudios.ipoalerts.utils.DETAILFRAGMENTSEARCHID
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 
 class CurrentFragment : Fragment() {
@@ -35,10 +34,9 @@ class CurrentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAdapter = BlockRecyclerAdapter({ searchId ->
-            sharedViewModel.indexStateBundle.putString(DETAILFRAGMENTSEARCHID, searchId)
-            findNavController().navigate(CurrentFragmentDirections.actionCurrentFragmentToDetailsNavGraph(
-                searchId))
+        mAdapter = BlockRecyclerAdapter(requireContext(),{ searchId, growwShortName->
+            findNavController().navigate(directions = CurrentFragmentDirections.actionCurrentFragmentToDetailsFragment2(
+                searchId = searchId, growwShortName = growwShortName))
         }, {
 
         })
@@ -58,6 +56,7 @@ class CurrentFragment : Fragment() {
                 }
             }
         })
+
         binding.mainRecyclerView.adapter = mAdapter
     }
 

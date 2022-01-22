@@ -1,5 +1,6 @@
 package com.lasteyestudios.ipoalerts.tabs.current
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,8 @@ import com.lasteyestudios.ipoalerts.databinding.IpoMainItemBinding
 import com.lasteyestudios.ipoalerts.tabs.current.BlockRecyclerAdapter.BlockAdapterViewHolder
 
 class BlockRecyclerAdapter(
-    private val onItemClicked: (searchId: String) -> Unit,
+    private val context:Context,
+    private val onItemClicked: (searchId: String, growwShortName: String) -> Unit,
     private val onBlockClicked: (ipoCategory: String) -> Unit,
 ) :
     ListAdapter<List<Company?>, BlockAdapterViewHolder>(HomeAdapterDiffCallback) {
@@ -44,11 +46,12 @@ class BlockRecyclerAdapter(
 
     inner class BlockAdapterViewHolder(private val binding: IpoMainItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val myAdapter = ItemRecyclerAdapter() {
-            onItemClicked(it)
+        private val myAdapter = ItemRecyclerAdapter(context) {searchId, growwShortName->
+            onItemClicked(searchId, growwShortName)
         }
 
         fun bind(item: List<Company?>, position: Int) {
+
             if (!item.isNullOrEmpty()) {
                 binding.noDataAvailable.visibility = View.GONE
                 myAdapter.submitList(item)
@@ -59,6 +62,9 @@ class BlockRecyclerAdapter(
             binding.ipoCategoryContainer.setOnClickListener {
                 onBlockClicked(value[position])
             }
+
+            binding.companyRecycler.isNestedScrollingEnabled = false
+
             binding.companyRecycler.adapter = myAdapter
 //            if (item[0]?.status != "") {
             binding.ipoCategory.text = value[position]

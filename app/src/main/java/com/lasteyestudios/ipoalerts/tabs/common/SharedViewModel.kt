@@ -1,6 +1,5 @@
 package com.lasteyestudios.ipoalerts.tabs.common
 
-import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +17,6 @@ class SharedViewModel : ViewModel() {
 
     // This is to maintain the state since this navigation system detaches
     // and attaches fragments instead of showing/hiding
-    val indexStateBundle = Bundle()
 
 
     private val networkRepository = NetworkRepository.getInstance()

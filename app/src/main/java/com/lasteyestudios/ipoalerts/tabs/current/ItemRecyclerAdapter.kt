@@ -1,5 +1,6 @@
 package com.lasteyestudios.ipoalerts.tabs.current
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,10 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.lasteyestudios.ipoalerts.R
 import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.Company
 import com.lasteyestudios.ipoalerts.databinding.IpoCompanyItemBinding
 
-class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit) :
+class ItemRecyclerAdapter(
+    private val context:Context,
+    private val onItemClicked: (searchId: String, growwShortName: String) -> Unit) :
     ListAdapter<Company?, ItemRecyclerAdapter.ItemAdapterViewHolder>(HomeAdapterDiffCallback) {
 
     object HomeAdapterDiffCallback : DiffUtil.ItemCallback<Company?>() {
@@ -37,8 +41,8 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
                 result = ",$result"
             }
         }
-        val temp =result + lastDigit
-        if(temp!=null){
+        val temp = result + lastDigit
+        if (temp != null) {
             return "₹$temp"
         }
         return temp
@@ -55,13 +59,13 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
                     binding.minimumPrice.text = s
 
                 } else {
-                    binding.minimumPrice.text = "N/A"
+                    binding.minimumPrice.text = context.getString(R.string.n_a)
                 }
 
                 if (it.issueSize != "") {
                     binding.issueSize.text = it.issueSize
                 } else {
-                    binding.issueSize.text = "N/A"
+                    binding.issueSize.text = context.getString(R.string.n_a)
                 }
 
 
@@ -71,7 +75,7 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
                     if (it.biddingStartDate != "") {
                         binding.offerDate.text = it.biddingStartDate
                     } else {
-                        binding.offerDate.text = "N/A"
+                        binding.offerDate.text = context.getString(R.string.n_a)
                     }
                 }
 
@@ -79,10 +83,12 @@ class ItemRecyclerAdapter(private val onItemClicked: (searchId: String) -> Unit)
                 if (range != " - ") {
                     binding.priceRange.text = range
                 } else {
-                    binding.priceRange.text = "N/A"
+                    binding.priceRange.text = context.getString(R.string.n_a)
                 }
                 binding.ipoCard.setOnClickListener { _ ->
-                    onItemClicked(it.searchId.toString())
+                    if (it.searchId != null && it.growwShortName != null) {
+                        onItemClicked(it.searchId.toString(), it.growwShortName.toString())
+                    }
                 }
                 Glide.with(binding.logoImage.context).load(it.logoUrl).centerCrop().transition(
                     DrawableTransitionOptions.withCrossFade(300)).into(binding.logoImage)

@@ -27,6 +27,7 @@
             tools:text="@string/app_name" />
 
         <ImageView
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
@@ -52,6 +53,8 @@
         android:id="@+id/company_recycler"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:theme="@style/CollapsingToolbarLayoutTheme"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_marginTop="10dp"
         android:clipToPadding="false"
         android:orientation="horizontal"

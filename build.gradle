@@ -9,7 +9,7 @@ buildscript {
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
 
         // Safe Args Dependency
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0-beta02")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0-rc01")
     }
 }
 

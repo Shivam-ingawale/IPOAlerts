@@ -292,12 +292,24 @@ class Transformer {
         return emptyList()
     }
 
+    //    private var i = 0
     fun searchAllotmentResults(data: String?): SearchAllotmentResultModel? {
-
-//        val data = "<NewDataSet>  <Table>    <higher_priceband>1180</higher_priceband>    <pull>X</pull>    <offer_price>1180</offer_price>    <NAME1>ASHWIN kumar fucki MOORTHY .</NAME1>    <ALLOT>0</ALLOT>    <SHARES>168</SHARES>    <AMTADJ>0</AMTADJ>    <companyname>Sapphire Foods India Limited - IPO</companyname>    <PEMNDG>Retail</PEMNDG>  </Table></NewDataSet>"
+//    for testing
+//        i += 1
+//        data = when (i) {
+//            3 -> {
+//                "<NewDataSet>  <Table>    <higher_priceband>1180</higher_priceband>    <pull>X</pull>    <offer_price>1180</offer_price>    <NAME1>ASHWIN kumar fucki MOORTHY .</NAME1>    <ALLOT>0</ALLOT>    <SHARES>168</SHARES>    <AMTADJ>0</AMTADJ>    <companyname>Sapphire Foods India Limited - IPO</companyname>    <PEMNDG>Retail</PEMNDG>  </Table></NewDataSet>"
+//            }
+//            2 -> {
+//                "<NewDataSet />"
+//            }
+//            else -> {
+//                "<NewDataSet>  <Table>    <higher_priceband>1180</higher_priceband>    <pull>X</pull>    <offer_price>1180</offer_price>    <NAME1>ASHWIN kumar fucki MOORTHY .</NAME1>    <ALLOT>10</ALLOT>    <SHARES>168</SHARES>    <AMTADJ>0</AMTADJ>    <companyname>Sapphire Foods India Limited - IPO</companyname>    <PEMNDG>Retail</PEMNDG>  </Table></NewDataSet>"
+//            }
+//        }
+//            Log.d(IPO_LOG_TAG, "final data i -> $i")
 
         if (data != null && data.length > 12) {
-//            Log.d(IPO_LOG_TAG, "final data -> $data")
             val first: Int = data.indexOf("Table") + 4
 
             val searchAllotmentResultModel = SearchAllotmentResultModel(

@@ -10,16 +10,20 @@
         android:name="com.lasteyestudios.ipoalerts.tabs.current.CurrentFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_ipo">
-
         <action
-            android:id="@+id/action_currentFragment_to_details_nav_graph"
-            app:destination="@id/details_nav_graph"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim">
-            <argument
-                android:name="searchId"
-                app:argType="string" />
-        </action>
+            android:id="@+id/action_currentFragment_to_detailsFragment2"
+            app:destination="@id/detailsFragment2" />
     </fragment>
-    <include app:graph="@navigation/details_nav_graph" />
+    <fragment
+        android:id="@+id/detailsFragment2"
+        android:name="com.lasteyestudios.ipoalerts.tabs.details.DetailsFragment"
+        android:label="fragment_ipo_details"
+        tools:layout="@layout/fragment_ipo_details" >
+        <argument
+            android:name="searchId"
+            app:argType="string" />
+        <argument
+            android:name="growwShortName"
+            app:argType="string" />
+    </fragment>
 </navigation>
