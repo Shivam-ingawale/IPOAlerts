@@ -11,6 +11,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import com.lasteyestudios.ipoalerts.data.local.model.CompanyLocalModel
 import com.lasteyestudios.ipoalerts.databinding.FragmentWatchListBinding
 import com.lasteyestudios.ipoalerts.repository.NotificationRepo
 import com.lasteyestudios.ipoalerts.tabs.current.ItemRecyclerAdapter
+import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 
 
 class WatchListFragment : Fragment() {
@@ -68,6 +70,8 @@ class WatchListFragment : Fragment() {
 
 
         notificationRepo.notifications.observe(viewLifecycleOwner) { notifications ->
+            Log.d(IPO_LOG_TAG, "notifications reach with data ->"+notifications)
+
             if (notifications != null) {
                 for (i in notifications.indices) {
                     if (notifications[i] != null) {

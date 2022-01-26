@@ -64,8 +64,10 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         }
-//        periodicWork()
+        periodicWork()
         Log.d(IPO_LOG_TAG, "in main activity")
+
+
     }
 
 
@@ -76,8 +78,9 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        i++
         val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
-        val alreadyRated = sharedPref.getBoolean(getString(R.string.worker_started), false)
-//        val alreadyRated = false
+//        val alreadyRated = sharedPref.getBoolean(getString(R.string.worker_started), false)
+        val alreadyRated = false
+        Log.d(IPO_LOG_TAG, "already d"+ alreadyRated)
 
         if (alreadyRated) {
             return
@@ -85,15 +88,16 @@ class MainActivity : AppCompatActivity() {
 
         val workConstraint =
             Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+        Log.d(IPO_LOG_TAG, "already reach")
         val periodicWorkRequest =
-            PeriodicWorkRequest.Builder(GetUpdatesWorker::class.java, 16, TimeUnit.MINUTES)
+            PeriodicWorkRequest.Builder(GetUpdatesWorker::class.java, 300, TimeUnit.MINUTES)
                 .setConstraints(workConstraint)
                 .build()
 
         // for test
 //        val once = OneTimeWorkRequest.Builder(GetUpdatesWorker::class.java).build()
         val workManager = WorkManager.getInstance(applicationContext)
-//        Log.d(IPO_LOG_TAG, "once done")
+        Log.d(IPO_LOG_TAG, "once done")
 //        workManager.enqueue(once)
         workManager.enqueue(periodicWorkRequest)
 
@@ -106,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         workManager.getWorkInfoByIdLiveData(periodicWorkRequest.id)
             .observe(this@MainActivity) {
                 if (it.state.isFinished) {
-
+                    return@observe
                 }
             }
 

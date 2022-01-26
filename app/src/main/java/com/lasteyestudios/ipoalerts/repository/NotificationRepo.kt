@@ -41,6 +41,7 @@ class NotificationRepo() {
     }
 
     suspend fun getIPOCompanyListingsForNotifications() {
+        Log.d(IPO_LOG_TAG, "getIPOCompanyListingsForNotifications start")
 
         val getAllGrowShortCompanyWishlist: List<String> =
             localDbRepository.getAllGrowShortCompanyWishlist()
@@ -51,7 +52,7 @@ class NotificationRepo() {
         }.collect { myResponse ->
             when (myResponse) {
                 is Response.Success -> {
-                    val new: MutableList<List<String>> = mutableListOf()
+                    var new: MutableList<List<String>> = mutableListOf()
                     for (j in myResponse.data.indices) {
                         if (myResponse.data?.get(j) != null) {
                             for (k in myResponse.data?.get(j)?.indices!!) {
@@ -93,6 +94,7 @@ class NotificationRepo() {
                                                 System.currentTimeMillis() / 1000,
                                                 updatedCompany.growwShortName!!,
                                                 updatedCompany))
+                                        Log.d(IPO_LOG_TAG, "updatedCompany ->"+updatedCompany+" and myLocalCompany ->"+myLocalCompany)
 
                                         break
                                     }
@@ -100,6 +102,10 @@ class NotificationRepo() {
                             }
                         }
                     }
+//                    testing
+                    new = listOf(listOf("sdfsdf","Sdfsdfsd","121s2df2")).toMutableList()
+                    Log.d(IPO_LOG_TAG, "value of new ->"+new)
+
                     _notifications.postValue(new)
 
                 }
@@ -108,5 +114,6 @@ class NotificationRepo() {
                 }
             }
         }
+        Log.d(IPO_LOG_TAG, "getIPOCompanyListingsForNotifications end")
     }
 }
