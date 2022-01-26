@@ -1,29 +1,32 @@
 package com.lasteyestudios.ipoalerts.data.models.ipolistingmodel
 
 data class Company(
-    val additionalTxt: String?,
-    val biddingEndDate: String?,
     val biddingStartDate: String?,
-    val documentUrl: String?,
     val growwShortName: String?,
-    val issuePrice: String?,
     val issueSize: String?,
     val listingDate: String?,
-    val listingGains: String?,
-    val listingPrice: String?,
     val logoUrl: String?,
-    val lotSize: String?,
     val maxPrice: String?,
     val minBidQuantity: String?,
     val minPrice: String?,
-    val name: String?,
-    val retailSubscriptionRate: String?,
     val searchId: String?,
     val status: String?,
-    val symbol: String?,
-    val canApply: Boolean,
-    val statusEnable: Boolean
+    var liked: Boolean,
+    val additionalTxt: String?,
+    val retailSubscriptionRate: String?,
+    val issuePrice: String?,
+    val listingGains: String?,
+    val listingPrice: String?,
 )
+
+//    val biddingEndDate: String?,
+//    val documentUrl: String?,
+//    val lotSize: String?,
+//    val name: String?,
+//    val symbol: String?,
+//    val canApply: Boolean,
+//    val statusEnable: Boolean
+
 
 //{
 //    "canApply": false,

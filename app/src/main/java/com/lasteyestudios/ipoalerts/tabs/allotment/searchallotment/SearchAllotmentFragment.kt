@@ -242,7 +242,7 @@ class SearchAllotmentFragment : Fragment() {
     }
 
     private fun googleReview() {
-        //todo set this
+//        todo set this
         hideKeyboard()
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val alreadyRated = sharedPref.getBoolean(getString(R.string.app_rated), false)
@@ -262,17 +262,25 @@ class SearchAllotmentFragment : Fragment() {
                         // We got the ReviewInfo object
                         val reviewInfo = request.result
                         val flow = manager.launchReviewFlow(requireActivity(), reviewInfo)
-                        flow.addOnCompleteListener {
-                            Log.d(IPO_LOG_TAG, "googleReview done")
+                        flow.addOnCompleteListener { task ->
+                            try {
+                                if (task.isSuccessful) {
+                                    Log.d(IPO_LOG_TAG, "In-app review returned.")
+                                }
+                                if (task.isComplete) {
+                                    Log.d(IPO_LOG_TAG, "googleReview done")
 
-                            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-                                ?: return@addOnCompleteListener
-                            with(sharedPref.edit()) {
-                                putBoolean(getString(R.string.app_rated), true)
-                                apply()
+                                    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                                        ?: return@addOnCompleteListener
+                                    with(sharedPref.edit()) {
+                                        putBoolean(getString(R.string.app_rated), true)
+                                        apply()
+                                    }
+                                }
+                                visibility = View.GONE
+                            } catch (ex: Exception) {
+                                Log.d(IPO_LOG_TAG, "Exception from openReview():")
                             }
-
-                            visibility = View.GONE
                         }
                     }
                 }

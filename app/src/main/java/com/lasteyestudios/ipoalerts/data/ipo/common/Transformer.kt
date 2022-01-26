@@ -119,13 +119,13 @@ class Transformer {
                 val jsonObject = d[i]?.asJsonObject
                 val jsonElementCompany = jsonObject?.get("company")?.asJsonObject
                 val company = Company(
-                    canApply = if (jsonObject?.get("canApply") != null) jsonObject.get("canApply").asBoolean else false,
-                    statusEnable = if (jsonObject?.get("statusEnable") != null) jsonObject.get("statusEnable").asBoolean else false,
+//                    canApply = if (jsonObject?.get("canApply") != null) jsonObject.get("canApply").asBoolean else false,
+//                    statusEnable = if (jsonObject?.get("statusEnable") != null) jsonObject.get("statusEnable").asBoolean else false,
                     searchId = objToString(jsonElementCompany?.get("searchId")),
                     additionalTxt = objToString(jsonElementCompany?.get("additionalTxt")),
-                    biddingEndDate = objToString(jsonElementCompany?.get("biddingEndDate")),
+//                    biddingEndDate = objToString(jsonElementCompany?.get("biddingEndDate")),
                     biddingStartDate = objToString(jsonElementCompany?.get("biddingStartDate")),
-                    documentUrl = objToString(jsonElementCompany?.get("documentUrl")),
+//                    documentUrl = objToString(jsonElementCompany?.get("documentUrl")),
                     growwShortName = objToString(jsonElementCompany?.get("growwShortName")),
                     issuePrice = (objToString(jsonElementCompany?.get("issuePrice"))),
                     issueSize = getFormattedNumber(objToString(jsonElementCompany?.get("issueSize"))),
@@ -133,14 +133,15 @@ class Transformer {
                     listingGains = objToString(jsonElementCompany?.get("listingGains")),
                     listingPrice = objToString(jsonElementCompany?.get("listingPrice")),
                     logoUrl = objToString(jsonElementCompany?.get("logoUrl")),
-                    lotSize = objToString(jsonElementCompany?.get("lotSize")),
+//                    lotSize = objToString(jsonElementCompany?.get("lotSize")),
                     maxPrice = objToString(jsonElementCompany?.get("maxPrice")),
                     minBidQuantity = objToString(jsonElementCompany?.get("minBidQuantity")),
                     minPrice = objToString(jsonElementCompany?.get("minPrice")),
-                    name = objToString(jsonElementCompany?.get("name")),
+//                    name = objToString(jsonElementCompany?.get("name")),
                     retailSubscriptionRate = objToString(jsonElementCompany?.get("retailSubscriptionRate")),
                     status = objToString(jsonElementCompany?.get("status")),
-                    symbol = objToString(jsonElementCompany?.get("symbol"))
+//                    symbol = objToString(jsonElementCompany?.get("symbol")),
+                    liked = false
                 )
                 if (company.searchId != "") {
                     list2.add(company)
@@ -292,11 +293,11 @@ class Transformer {
         return emptyList()
     }
 
-    //    private var i = 0
+    //        private var i = 0
     fun searchAllotmentResults(data: String?): SearchAllotmentResultModel? {
 //    for testing
 //        i += 1
-//        data = when (i) {
+//        val data = when (i) {
 //            3 -> {
 //                "<NewDataSet>  <Table>    <higher_priceband>1180</higher_priceband>    <pull>X</pull>    <offer_price>1180</offer_price>    <NAME1>ASHWIN kumar fucki MOORTHY .</NAME1>    <ALLOT>0</ALLOT>    <SHARES>168</SHARES>    <AMTADJ>0</AMTADJ>    <companyname>Sapphire Foods India Limited - IPO</companyname>    <PEMNDG>Retail</PEMNDG>  </Table></NewDataSet>"
 //            }

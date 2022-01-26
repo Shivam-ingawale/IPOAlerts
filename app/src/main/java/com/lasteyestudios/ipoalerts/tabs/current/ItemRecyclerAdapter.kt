@@ -1,8 +1,11 @@
 package com.lasteyestudios.ipoalerts.tabs.current
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +16,11 @@ import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.Company
 import com.lasteyestudios.ipoalerts.databinding.IpoCompanyItemBinding
 
 class ItemRecyclerAdapter(
-    private val context:Context,
-    private val onItemClicked: (searchId: String, growwShortName: String) -> Unit) :
+    private val context: Context,
+    private val onItemClicked: (searchId: String, growwShortName: String) -> Unit,
+    private val deleteWatchlistCompany: (growwShortName: String) -> Unit,
+    private val addWatchlistCompany: (company: Company) -> Unit,
+) :
     ListAdapter<Company?, ItemRecyclerAdapter.ItemAdapterViewHolder>(HomeAdapterDiffCallback) {
 
     object HomeAdapterDiffCallback : DiffUtil.ItemCallback<Company?>() {
@@ -28,7 +34,36 @@ class ItemRecyclerAdapter(
 
     }
 
-    fun rupeeFormat(value: String): String? {
+    private fun rupeeFormatDecimal(value: String): String {
+        value.replace(",", "")
+        if (value == "" || value == "null" || value == "0") {
+            return ""
+        }
+        if (value.contains(".")) {
+            val f = value.indexOf(".")
+            val dotAfterDigit = value.substring(f, value.length)
+            val lastDigit = value[f - 1]
+            var result = ""
+            val len = f - 1
+            var nDigits = 0
+            for (i in len - 1 downTo 0) {
+                result = value[i].toString() + result
+                nDigits++
+                if (nDigits % 2 == 0 && i > 0) {
+                    result = ",$result"
+                }
+            }
+            val temp = result + lastDigit + dotAfterDigit
+            return "₹$temp"
+
+        }
+        return ""
+    }
+
+    fun rupeeFormat(value: String?): String? {
+        if (value == "" || value == null) {
+            return ""
+        }
         value.replace(",", "")
         val lastDigit = value[value.length - 1]
         var result = ""
@@ -51,7 +86,39 @@ class ItemRecyclerAdapter(
     inner class ItemAdapterViewHolder(private val binding: IpoCompanyItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Company?) {
+            val totalWidth: Int = Resources.getSystem().displayMetrics.widthPixels
+            val itemWidth = (totalWidth * 0.84) / 2
+            val itemHeight = (itemWidth * 16.0) / 9
+            val x = (itemHeight).toInt()
+//                binding.root.layoutParams.height = x
+
             item?.let {
+                if ((it.status != "LISTED")) {
+                    binding.wishlistHeart.visibility = View.VISIBLE
+                    if (it.liked) {
+                        binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(context,
+                            R.drawable.ic_watch_list))
+                    } else {
+                        binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(context,
+                            R.drawable.ic_heart))
+                    }
+                    binding.wishlistHeart.setOnClickListener { view ->
+                        it.liked = !it.liked
+                        if (it.liked) {
+                            addWatchlistCompany(item)
+                        } else {
+                            deleteWatchlistCompany(item.growwShortName.toString())
+                        }
+                        if (it.liked) {
+                            binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(context,
+                                R.drawable.ic_watch_list))
+                        } else {
+                            binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(context,
+                                R.drawable.ic_heart))
+                        }
+                    }
+
+                }
                 binding.companyName.text = it.growwShortName
                 if (it.minPrice != "" || it.minBidQuantity != "") {
                     val s = rupeeFormat(((it.minPrice?.toFloat()
@@ -79,12 +146,15 @@ class ItemRecyclerAdapter(
                     }
                 }
 
-                val range = it.minPrice + " - " + it.maxPrice
+                val range =
+                    rupeeFormatDecimal(it.minPrice.toString()) + " - " + rupeeFormatDecimal(it.maxPrice.toString())
                 if (range != " - ") {
                     binding.priceRange.text = range
                 } else {
                     binding.priceRange.text = context.getString(R.string.n_a)
                 }
+                binding.priceRange.isSelected = true
+
                 binding.ipoCard.setOnClickListener { _ ->
                     if (it.searchId != null && it.growwShortName != null) {
                         onItemClicked(it.searchId.toString(), it.growwShortName.toString())

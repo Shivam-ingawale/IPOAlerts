@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IPOAlerts</string>
+    <string name="app_name">IPO Alerts - Allotments, Details and Alerts</string>
     <string name="watch_list">Watch List</string>
     <string name="allotments">Allotment Status</string>
     <string name="ipos">IPOs</string>
@@ -28,6 +28,7 @@
     <string name="ipo_details">IPO Details</string>
     <string name="ipo_docs">Docs📂</string>
     <string name="app_rated">APP_RATED</string>
+    <string name="worker_started">WORKER_STARTED</string>
     <string name="ipo_docs_text">IPO Docs</string>
     <string name="about_company">About Company</string>
     <string name="important_dates">Important Dates</string>

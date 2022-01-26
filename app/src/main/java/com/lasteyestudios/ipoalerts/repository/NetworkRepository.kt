@@ -60,12 +60,9 @@ class NetworkRepository {
                 }
             }
         }
-
         return flow {
             emit(Response.Loading)
-            currentlyGettingExploreResponse = true
             myIpoListing = withContext(Dispatchers.IO) { ipoClient.getIPOCompanyListings() }
-            currentlyGettingExploreResponse = false
             emit(Response.Success(listOf<List<Company?>?>(myIpoListing?.ACTIVE,
                 myIpoListing?.UPCOMING,
                 myIpoListing?.LISTED,
@@ -92,10 +89,8 @@ class NetworkRepository {
         }
         return flow {
             emit(Response.Loading)
-            currentlyGettingIPOCompanyDetails = true
             iPOCompanyDetails =
                 withContext(Dispatchers.IO) { ipoClient.getIPOCompanyDetails(searchId = searchId) }
-            currentlyGettingIPOCompanyDetails = false
             emit(Response.Success(iPOCompanyDetails))
             Log.d(IPO_LOG_TAG, "getIPOCompanyListings Network Repo-> Done $iPOCompanyDetails")
         }
@@ -119,10 +114,8 @@ class NetworkRepository {
         Log.d(IPO_LOG_TAG, "network repo -> start")
         return flow {
             emit(Response.Loading)
-            currentlyGettingAvailableAllotments = true
             availableAllotments =
                 withContext(Dispatchers.IO) { ipoClient.getAvailableIPOAllotmentsData() }
-            currentlyGettingAvailableAllotments = false
             emit(Response.Success(availableAllotments))
             Log.d(IPO_LOG_TAG, "getIPOAllotments Network Repo-> Done data -> $availableAllotments")
         }
@@ -138,13 +131,11 @@ class NetworkRepository {
 
         return flow {
             emit(Response.Loading)
-            currentlyGettingSearchAllotmentsResults = true
-             var searchAllotmentsResults = withContext(Dispatchers.IO) {
+            var searchAllotmentsResults = withContext(Dispatchers.IO) {
                 ipoClient.getSearchAllotmentsResults(companyId,
                     keyWord,
                     userDoc)
             }
-            currentlyGettingSearchAllotmentsResults = false
             emit(Response.Success(searchAllotmentsResults))
             Log.d(
                 IPO_LOG_TAG,

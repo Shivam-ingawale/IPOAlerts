@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="5dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/ipo_card"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="240dp"
         android:clickable="true"
         android:focusable="true"
@@ -17,10 +17,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp">
+
+
+            <ImageButton
+                android:id="@+id/wishlist_heart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="4dp"
+                android:background="@color/transparent"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/logo_image_card"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/logo_image_card"
@@ -39,7 +52,7 @@
                     android:layout_height="100dp"
                     android:background="@color/white"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_arrow_right"
+                    android:src="@mipmap/ic_launcher"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -52,9 +65,9 @@
                 android:layout_height="36dp"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxWidth="170dp"
                 android:maxLines="2"
-                android:gravity="center"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,10 +77,10 @@
 
             <TextView
                 android:id="@+id/offer_date_text"
-                android:layout_marginEnd="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
                 android:text="@string/offer_date"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toStartOf="@id/guideline3"
@@ -88,8 +101,8 @@
                 android:id="@+id/price_range_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
                 android:text="@string/price_range"
-                android:layout_marginEnd="20dp"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline3"
@@ -98,10 +111,20 @@
 
             <TextView
                 android:id="@+id/price_range"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:lines="1"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxWidth="75dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/price_range_text"
                 app:layout_constraintTop_toBottomOf="@id/price_range_text"
                 tools:text="285-290" />
@@ -154,7 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5"/>
+                app:layout_constraintGuide_percent="0.5" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

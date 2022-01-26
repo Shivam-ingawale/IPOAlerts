@@ -45,7 +45,7 @@ class DetailsFragment : Fragment() {
         growwShortName = args.growwShortName
 
         detailsViewModel.loadData(searchId = searchId, growwShortName = growwShortName)
-        detailsViewModel.detailsIPOs.observe(viewLifecycleOwner, { myResponse ->
+        detailsViewModel.detailsIPOs.observe(viewLifecycleOwner) { myResponse ->
             if (myResponse != null) {
                 when (myResponse) {
                     Response.Error -> {
@@ -87,10 +87,14 @@ class DetailsFragment : Fragment() {
                                         rupeeFormat(it.issuePrice)
                                 }
                                 if (!it.listing.listingPrice.isNullOrBlank() && !it.issuePrice.isNullOrBlank()) {
-                                    val gainPrice =it.listing.listingPrice?.toDouble() - it.issuePrice?.toDouble()
-                                    val gainPercent = (gainPrice*100.0 / it.issuePrice?.toDouble())
+                                    val gainPrice =
+                                        it.listing.listingPrice?.toDouble() - it.issuePrice?.toDouble()
+                                    val gainPercent =
+                                        (gainPrice * 100.0 / it.issuePrice?.toDouble())
 //                                    Log.d(IPO_LOG_TAG, "it.listing.listingPrice -> ${it.listing.listingPrice} and it.issuePrice ->${it.issuePrice}")
-                                    val final = rupeeFormat((gainPrice).toString()) + " ("+ gainPercent.toBigDecimal().setScale(2, RoundingMode.UP).toDouble() + "%)"
+                                    val final =
+                                        rupeeFormat((gainPrice).toString()) + " (" + gainPercent.toBigDecimal()
+                                            .setScale(2, RoundingMode.UP).toDouble() + "%)"
                                     binding.detailsListing.listingGains.text = final.toString()
 
                                 }
@@ -262,7 +266,7 @@ class DetailsFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun subscriptionHelper(value: String): String {

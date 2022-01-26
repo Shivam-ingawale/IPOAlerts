@@ -15,6 +15,8 @@ class BlockRecyclerAdapter(
     private val context:Context,
     private val onItemClicked: (searchId: String, growwShortName: String) -> Unit,
     private val onBlockClicked: (ipoCategory: String) -> Unit,
+    private val deleteWatchlistCompany: (growwShortName: String) -> Unit,
+    private val addWatchlistCompany: (company: Company) -> Unit,
 ) :
     ListAdapter<List<Company?>, BlockAdapterViewHolder>(HomeAdapterDiffCallback) {
 
@@ -46,9 +48,13 @@ class BlockRecyclerAdapter(
 
     inner class BlockAdapterViewHolder(private val binding: IpoMainItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val myAdapter = ItemRecyclerAdapter(context) {searchId, growwShortName->
+        private val myAdapter = ItemRecyclerAdapter(context,  {searchId, growwShortName->
             onItemClicked(searchId, growwShortName)
-        }
+        },{deleteGrowwShortName->
+            deleteWatchlistCompany(deleteGrowwShortName)
+        },{add->
+            addWatchlistCompany(add)
+        })
 
         fun bind(item: List<Company?>, position: Int) {
 

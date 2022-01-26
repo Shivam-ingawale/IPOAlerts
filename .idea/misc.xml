@@ -15,6 +15,7 @@
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/drawable/ic_explore.xml" value="0.26458333333333334" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/drawable/ic_heart.xml" value="0.26458333333333334" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/drawable/ic_home.xml" value="0.26458333333333334" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/drawable/ic_ipo_alert.xml" value="0.2605128205128205" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/drawable/ic_listed.xml" value="0.26458333333333334" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/drawable/ic_reload.xml" value="0.26458333333333334" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/drawable/ic_star.xml" value="0.26458333333333334" />
@@ -37,7 +38,8 @@
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_listed.xml" value="0.2484375" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_search_allotment.xml" value="0.264" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/fragment_watch_list.xml" value="0.2484375" />
-        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/ipo_company_item.xml" value="0.6" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/ipo_company_item.xml" value="0.536" />
+        <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/ipo_company_item_2.xml" value="0.6" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/layout/ipo_main_item.xml" value="0.264" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2484375" />
         <entry key="..\:/MyProject/navigationWithFragments/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

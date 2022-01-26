@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:theme="@style/CollapsingToolbarLayoutTheme"
     android:layout_height="match_parent"
+    android:theme="@style/CollapsingToolbarLayoutTheme"
     tools:context=".tabs.current.CurrentFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,41 +23,39 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <!--                image view-->
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="10dp"
-                    android:contentDescription="@string/about_company"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/creator_name"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="30dp"-->
-                <!--                    android:layout_marginTop="32dp"-->
-                <!--                    android:layout_marginEnd="15dp"-->
-                <!--                    android:layout_marginBottom="32dp"-->
-                <!--                    android:ellipsize="end"-->
-                <!--                    android:gravity="center_horizontal"-->
-                <!--                    android:maxLines="1"-->
-                <!--                    android:singleLine="true"-->
-                <!--                    android:text="@string/app_name"-->
-                <!--                    android:textIsSelectable="true"-->
-                <!--                    android:textSize="20sp"-->
-                <!--                    android:textStyle="bold"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                    <ImageView
+                        android:id="@+id/logo_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="10dp"
+                        android:contentDescription="@string/about_company"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ipo_alert_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ipo_alert_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:contentDescription="@string/about_company"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_ipo_alert"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/logo_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -76,7 +74,7 @@
         tools:itemCount="4"
         tools:listitem="@layout/ipo_main_item" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <Button
         android:id="@+id/retry_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

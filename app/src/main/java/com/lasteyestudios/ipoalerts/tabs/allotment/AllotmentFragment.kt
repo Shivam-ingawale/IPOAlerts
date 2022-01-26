@@ -43,7 +43,7 @@ class AllotmentFragment : Fragment() {
 //
 //            findNavController().navigate(R.id.action_ListedFragment_to_watchListFragment2)
 //        }
-        allotmentViewModel.allotmentIPOs.observe(viewLifecycleOwner, { myResponse ->
+        allotmentViewModel.allotmentIPOs.observe(viewLifecycleOwner) { myResponse ->
             when (myResponse) {
                 Response.Error -> {
                     handleRetry()
@@ -57,7 +57,7 @@ class AllotmentFragment : Fragment() {
                     mAdapter.submitList(myResponse.data)
                 }
             }
-        })
+        }
         binding.allotmentRecyclerView.adapter = mAdapter
     }
 

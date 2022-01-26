@@ -10,6 +10,6 @@ const val HAPPY_GIF = "https://media.giphy.com/media/TJssvTF16urPfizSVy/giphy.gi
 const val SAD_GIF = "https://media.giphy.com/media/1iTItUOuJLsbev28/giphy.gif"
 const val BETTER_LUCK_NEXT_TIME = "https://media.giphy.com/media/hpRuXgGR5RORZjsLq0/giphy.gif"
 
-
+const val WORKER_OUTPUT_DATA  = "WORKER_OUTPUT_DATA"
 //
 const val DETAILFRAGMENTSEARCHID = "DetailFragmentSearchId"
