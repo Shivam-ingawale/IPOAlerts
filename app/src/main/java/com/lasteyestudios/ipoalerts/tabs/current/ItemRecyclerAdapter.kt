@@ -93,7 +93,7 @@ class ItemRecyclerAdapter(
 //                binding.root.layoutParams.height = x
 
             item?.let {
-                if ((it.status != "LISTED")) {
+                if ((it.status != "LISTED" || it.liked)) {
                     binding.wishlistHeart.visibility = View.VISIBLE
                     if (it.liked) {
                         binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(context,
@@ -117,7 +117,6 @@ class ItemRecyclerAdapter(
                                 R.drawable.ic_heart))
                         }
                     }
-
                 }
                 binding.companyName.text = it.growwShortName
                 if (it.minPrice != "" || it.minBidQuantity != "") {

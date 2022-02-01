@@ -11,12 +11,19 @@
         android:label="fragment_connect"
         tools:layout="@layout/fragment_watch_list" >
         <action
-            android:id="@+id/action_watchListFragment_to_listedFragment"
-            app:destination="@id/listedFragment" />
+            android:id="@+id/action_watchListFragment_to_detailsFragment3"
+            app:destination="@id/detailsFragment3" />
     </fragment>
     <fragment
-        android:id="@+id/listedFragment"
-        android:name="com.lasteyestudios.ipoalerts.tabs.allotment.AllotmentFragment"
-        android:label="fragment_listed"
-        tools:layout="@layout/fragment_allotment" />
+        android:id="@+id/detailsFragment3"
+        android:name="com.lasteyestudios.ipoalerts.tabs.details.DetailsFragment"
+        android:label="fragment_ipo_details"
+        tools:layout="@layout/fragment_ipo_details" >
+        <argument
+            android:name="growwShortName"
+            app:argType="string" />
+        <argument
+            android:name="searchId"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lasteyestudios.ipoalerts.data.local.model.CompanyLocalModel
 import com.lasteyestudios.ipoalerts.databinding.FragmentWatchListBinding
 import com.lasteyestudios.ipoalerts.tabs.current.ItemRecyclerAdapter
@@ -36,7 +37,9 @@ class WatchListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         itemRecyclerAdapter = ItemRecyclerAdapter(requireContext(), { searchId, growwShortName ->
-            //todo
+            findNavController().navigate(WatchListFragmentDirections.actionWatchListFragmentToDetailsFragment3(
+                growwShortName = growwShortName,
+                searchId = searchId))
         }, { deleteGrowwShortName ->
             watchListViewModel.deleteCompanyWishlistByGrowwShortName(deleteGrowwShortName)
         }, { add ->
