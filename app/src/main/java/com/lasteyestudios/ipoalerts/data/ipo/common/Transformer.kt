@@ -39,12 +39,18 @@ class Transformer {
         return (i)
     }
 
-    private fun helperIPOAllotmentsData(data: String, key: String, gap: Int): String {
+    private fun helperIPOAllotmentsData(data: String, key: String, gap: Int): String? {
 
         val first = data.indexOf(key, gap) + key.length + 1
         val sec = data.indexOf(key, first) - 2
+
+        if (data.indexOf("<$key />", gap) == data.indexOf(key, gap)-1) {
+            return null
+        }
+
         val temp = data.substring(first, sec)
         return objToString(temp)
+
     }
 
     private fun financialsDetailsHelper(financials: JsonArray?): List<Financial>? {
@@ -254,7 +260,7 @@ class Transformer {
 //            data.replace("/", "")
 //            data.replace("<", "")
 //            data.replace(">", "")
-
+            Log.d(IPO_LOG_TAG, "final data  -> $data")
 //            Log.d(IPO_LOG_TAG, "final data -> $data")
 
             if (data.length < 12) {
@@ -280,7 +286,7 @@ class Transformer {
                     REGD_OFF = helperIPOAllotmentsData(data, "REGD_OFF", first),
                     total_shares = getFormattedNumber(helperIPOAllotmentsData(data,
                         "total_shares",
-                        first))
+                        first).toString())
                 )
 
 //                Log.d(IPO_LOG_TAG, "final id -> ${availableAllotmentModel.company_id} and se -> ${availableAllotmentModel.COMPANY_SE}")
@@ -309,6 +315,7 @@ class Transformer {
 //            }
 //        }
 //            Log.d(IPO_LOG_TAG, "final data i -> $i")
+//            Log.d(IPO_LOG_TAG, "final data  -> $data")
 
         if (data != null && data.length > 12) {
             val first: Int = data.indexOf("Table") + 4

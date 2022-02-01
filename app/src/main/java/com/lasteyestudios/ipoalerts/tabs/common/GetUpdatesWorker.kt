@@ -1,6 +1,5 @@
 package com.lasteyestudios.ipoalerts.tabs.common
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
@@ -11,7 +10,7 @@ import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 class GetUpdatesWorker(context: Context, param: WorkerParameters) :
     CoroutineWorker(context, param) {
     private val notificationRepo = NotificationRepo.getInstance()
-    @SuppressLint("RestrictedApi")
+
     override suspend fun doWork(): Result {
         return try {
             notificationRepo.getIPOCompanyListingsForNotifications()

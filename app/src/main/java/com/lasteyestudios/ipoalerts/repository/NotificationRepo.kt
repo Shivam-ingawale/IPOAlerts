@@ -12,7 +12,7 @@ import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 
-class NotificationRepo() {
+class NotificationRepo {
     private val networkRepository = NetworkRepository.getInstance()
     private val localDbRepository: LocalDbRepository
     private val watchListViewModel = WatchListViewModel(Application())
@@ -60,31 +60,41 @@ class NotificationRepo() {
                                     if (myResponse.data?.get(j)
                                             ?.get(k)?.growwShortName == getAllGrowShortCompanyWishlist[i]
                                     ) {
-                                        val myLocalCompany =
+                                        var myLocalCompany =
                                             getCompanyLocalFromGrowwShortName(
                                                 getAllGrowShortCompanyWishlist[i]).company
+
+                                        //testing
+//                                        myLocalCompany = Company(biddingStartDate = null,growwShortName = null,issueSize = null,listingDate = null,logoUrl = null,maxPrice = null,minBidQuantity = null,minPrice = null,searchId = null, status = null, liked = false,additionalTxt = null,retailSubscriptionRate = null,issuePrice = null,listingGains = null,listingPrice = null)
+
+
                                         val updatedCompany = myResponse.data?.get(j)?.get(k)!!
 
-                                        val curr: MutableList<String>? = null
+//                                        Log.d(IPO_LOG_TAG, "updatedCompany -> $updatedCompany")
+//                                        Log.d(IPO_LOG_TAG, "myLocalCompany -> $myLocalCompany")
+                                        val t = emptyList<String>()
+                                        val curr: MutableList<String> = t.toMutableList()
 
 
+//                                        Log.d(IPO_LOG_TAG,"element " + updatedCompany.status + " to " + myLocalCompany.status + " not equal "+(updatedCompany.status != myLocalCompany.status))
                                         if (updatedCompany.status != myLocalCompany.status) {
-
-                                            curr?.add(updatedCompany.growwShortName + " Status Changed to " + updatedCompany.status)
+                                            curr.add(updatedCompany.growwShortName + " Status Changed to " + updatedCompany.status)
+//                                            Log.d(IPO_LOG_TAG, "curr ->${curr.toString()}")
                                         }
                                         if (updatedCompany.additionalTxt != myLocalCompany.additionalTxt) {
-                                            curr?.add(updatedCompany.growwShortName + " " + updatedCompany.additionalTxt)
+                                            curr.add(updatedCompany.growwShortName + " " + updatedCompany.additionalTxt)
                                         }
                                         if (updatedCompany.biddingStartDate != myLocalCompany.biddingStartDate) {
-                                            curr?.add(updatedCompany.growwShortName + " Bidding Start Date is " + updatedCompany.biddingStartDate)
+                                            curr.add(updatedCompany.growwShortName + " Bidding Start Date is " + updatedCompany.biddingStartDate)
                                         }
                                         if (updatedCompany.listingDate != myLocalCompany.listingDate) {
-                                            curr?.add(updatedCompany.growwShortName + " Listing  Date is " + updatedCompany.listingDate)
+                                            curr.add(updatedCompany.growwShortName + " Listing  Date is " + updatedCompany.listingDate)
                                         }
                                         if (updatedCompany.listingGains != myLocalCompany.listingGains) {
-                                            curr?.add(updatedCompany.growwShortName + " Listing  Date is " + updatedCompany.listingGains)
+                                            curr.add(updatedCompany.growwShortName + " Listing  Date is " + updatedCompany.listingGains)
                                         }
-                                        curr?.let { new.add(it) }
+                                        Log.d(IPO_LOG_TAG, "curr -> $curr")
+                                        curr.let { new.add(it) }
 
                                         localDbRepository.deleteCompanyWishlistByGrowwShortName(
                                             myLocalCompany.growwShortName.toString())
@@ -94,7 +104,8 @@ class NotificationRepo() {
                                                 System.currentTimeMillis() / 1000,
                                                 updatedCompany.growwShortName!!,
                                                 updatedCompany))
-                                        Log.d(IPO_LOG_TAG, "updatedCompany ->"+updatedCompany+" and myLocalCompany ->"+myLocalCompany)
+                                        Log.d(IPO_LOG_TAG,
+                                            "updatedCompany ->$updatedCompany and myLocalCompany ->$myLocalCompany")
 
                                         break
                                     }
@@ -103,10 +114,10 @@ class NotificationRepo() {
                         }
                     }
 //                    testing
-                    new = listOf(listOf("sdfsdf","Sdfsdfsd","121s2df2")).toMutableList()
-                    Log.d(IPO_LOG_TAG, "value of new ->"+new)
+//                    new = listOf(listOf("sdfsdf","Sdfsdfsd","121s2df2")).toMutableList()
+                    Log.d(IPO_LOG_TAG, "value of new ->${new.toList()}")
 
-                    _notifications.postValue(new)
+                    _notifications.postValue(new.toList())
 
                 }
                 else -> {
