@@ -60,4 +60,6 @@
     <string name="issue_price">Issue Price</string>
     <string name="listing_price">Listing Price</string>
     <string name="listing_gains">Listing Gains</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

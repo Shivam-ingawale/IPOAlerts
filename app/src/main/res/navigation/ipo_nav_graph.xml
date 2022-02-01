@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_currentFragment_to_detailsFragment2"
             app:destination="@id/detailsFragment2" />
+        <action
+            android:id="@+id/action_currentFragment_to_ipoCategory"
+            app:destination="@id/ipoCategory" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment2"
@@ -25,5 +28,17 @@
         <argument
             android:name="growwShortName"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/ipoCategory"
+        android:name="com.lasteyestudios.ipoalerts.tabs.current.ipocategory.IpoCategory"
+        android:label="fragment_ipo_category"
+        tools:layout="@layout/fragment_ipo_category" >
+        <argument
+            android:name="ipoCategory"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_ipoCategory_to_detailsFragment2"
+            app:destination="@id/detailsFragment2" />
     </fragment>
 </navigation>

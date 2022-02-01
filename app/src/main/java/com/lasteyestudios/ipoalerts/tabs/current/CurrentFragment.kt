@@ -48,9 +48,11 @@ class CurrentFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
+
         periodicWork()
         watchListViewModel.loadData()
         notificationRepo = NotificationRepo.getInstance()
+
         _binding = FragmentIpoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -63,7 +65,11 @@ class CurrentFragment : Fragment() {
         mAdapter = BlockRecyclerAdapter(requireContext(), { searchId, growwShortName ->
             findNavController().navigate(directions = CurrentFragmentDirections.actionCurrentFragmentToDetailsFragment2(
                 searchId = searchId, growwShortName = growwShortName))
-        }, {
+        }, { ipoCategory ->
+
+            findNavController().navigate(CurrentFragmentDirections.actionCurrentFragmentToIpoCategory(
+                ipoCategory = ipoCategory))
+
             //on block click todo
         }, { deleteGrowwShortName ->
             watchListViewModel.deleteCompanyWishlistByGrowwShortName(deleteGrowwShortName)

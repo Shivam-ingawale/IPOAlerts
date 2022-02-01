@@ -60,14 +60,16 @@ class BlockRecyclerAdapter(
 
             if (!item.isNullOrEmpty()) {
                 binding.noDataAvailable.visibility = View.GONE
+                binding.arrow.visibility = View.VISIBLE
+                binding.ipoCategoryContainer.setOnClickListener {
+                    onBlockClicked(value[position])
+                }
                 myAdapter.submitList(item)
             }else{
                 binding.noDataAvailable.visibility = View.VISIBLE
+                binding.arrow.visibility = View.INVISIBLE
             }
 
-            binding.ipoCategoryContainer.setOnClickListener {
-                onBlockClicked(value[position])
-            }
 
             binding.companyRecycler.isNestedScrollingEnabled = false
 
