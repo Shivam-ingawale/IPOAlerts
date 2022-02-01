@@ -242,7 +242,6 @@ class SearchAllotmentFragment : Fragment() {
     }
 
     private fun googleReview() {
-//        todo set this
         hideKeyboard()
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val alreadyRated = sharedPref.getBoolean(getString(R.string.app_rated), false)

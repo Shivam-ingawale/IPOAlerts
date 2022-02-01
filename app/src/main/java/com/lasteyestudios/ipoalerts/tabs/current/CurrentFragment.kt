@@ -1,5 +1,6 @@
 package com.lasteyestudios.ipoalerts.tabs.current
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -41,7 +42,7 @@ class CurrentFragment : Fragment() {
 
     private val watchListViewModel: WatchListViewModel by activityViewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val currentViewModel: CurrentViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +61,7 @@ class CurrentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        notificationGroup("heeeee", "poopoopo")
+//        notificationGroup("he", "pop")
 
         mAdapter = BlockRecyclerAdapter(requireContext(), { searchId, growwShortName ->
             findNavController().navigate(directions = CurrentFragmentDirections.actionCurrentFragmentToDetailsFragment2(
@@ -70,7 +71,6 @@ class CurrentFragment : Fragment() {
             findNavController().navigate(CurrentFragmentDirections.actionCurrentFragmentToIpoCategory(
                 ipoCategory = ipoCategory))
 
-            //on block click todo
         }, { deleteGrowwShortName ->
             watchListViewModel.deleteCompanyWishlistByGrowwShortName(deleteGrowwShortName)
         }, { add ->
@@ -178,6 +178,7 @@ class CurrentFragment : Fragment() {
     private var bundleNotificationId = 100
     private var singleNotificationId = 100
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     fun notificationGroup(contentTitle: String, contentText: String) {
 
         //  Create Notification
