@@ -36,6 +36,9 @@ class WatchListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        throw error("ohh no")
+
         itemRecyclerAdapter = ItemRecyclerAdapter(requireContext(), { searchId, growwShortName ->
             findNavController().navigate(WatchListFragmentDirections.actionWatchListFragmentToDetailsFragment3(
                 growwShortName = growwShortName,
