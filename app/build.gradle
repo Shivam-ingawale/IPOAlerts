@@ -93,7 +93,12 @@ dependencies {
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     //logging
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+//    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    // AppCenter
+    def appCenterSdkVersion = '4.3.1'
+    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
 
     /*
 //     Permissions
