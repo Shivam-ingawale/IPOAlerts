@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.lasteyestudios.ipoalerts.data.local.model.CompanyLocalModel
 import com.lasteyestudios.ipoalerts.databinding.FragmentWatchListBinding
 import com.lasteyestudios.ipoalerts.tabs.current.ItemRecyclerAdapter
+import com.lasteyestudios.ipoalerts.utils.WATCHLIST_FRAGMENT
 
 
 class WatchListFragment : Fragment() {
@@ -39,27 +40,31 @@ class WatchListFragment : Fragment() {
 
 //        throw error("ohh no")
 
-        itemRecyclerAdapter = ItemRecyclerAdapter(requireContext(), { searchId, growwShortName ->
+        itemRecyclerAdapter = ItemRecyclerAdapter(requireContext(), { searchId, growwShortName , liked->
             findNavController().navigate(WatchListFragmentDirections.actionWatchListFragmentToDetailsFragment3(
                 growwShortName = growwShortName,
-                searchId = searchId))
-        }, { deleteGrowwShortName ->
-            watchListViewModel.deleteCompanyWishlistByGrowwShortName(deleteGrowwShortName)
+                searchId = searchId,
+            liked = liked))
+        }, { deleteSymbol ->
+            watchListViewModel.deleteCompanyWishlistBySymbol(deleteSymbol)
         }, { add ->
             watchListViewModel.insertWatchlistCompanyLocal(CompanyLocalModel(0,
                 0,
                 add.growwShortName.toString(),
+                add.symbol.toString(),
                 add))
-        })
+        }, WATCHLIST_FRAGMENT)
 
 
         watchListViewModel.getAllCompanyWishlist.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.watchlistEmptyText.visibility = View.VISIBLE
+            } else {
+                binding.watchlistEmptyText.visibility = View.INVISIBLE
+            }
             itemRecyclerAdapter.submitList(watchListViewModel.getListCompanyFromCompanyLocal(it))
         }
         binding.watchlistRecycler.adapter = itemRecyclerAdapter
-
-
-
 
 
 //        binding.text.setOnClickListener {
@@ -74,11 +79,6 @@ class WatchListFragment : Fragment() {
 //
 //        }
     }
-
-
-
-
-
 
 
     override fun onDestroyView() {

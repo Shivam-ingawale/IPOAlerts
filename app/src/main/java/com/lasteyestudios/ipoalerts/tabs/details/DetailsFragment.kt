@@ -7,14 +7,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.lasteyestudios.ipoalerts.R
+import com.lasteyestudios.ipoalerts.data.local.model.CompanyLocalModel
 import com.lasteyestudios.ipoalerts.data.models.Response
+import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.Company
 import com.lasteyestudios.ipoalerts.databinding.FragmentIpoDetailsBinding
-import com.lasteyestudios.ipoalerts.tabs.common.SharedViewModel
+import com.lasteyestudios.ipoalerts.tabs.watchlist.WatchListViewModel
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 import java.math.RoundingMode
 
@@ -23,10 +26,12 @@ class DetailsFragment : Fragment() {
 
     private var _binding: FragmentIpoDetailsBinding? = null
     private val binding get() = _binding!!
-    private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var searchId: String
+    private var liked: Boolean = false
     private val detailsViewModel: DetailsViewModel by activityViewModels()
     private val args: DetailsFragmentArgs by navArgs()
+    private val watchListViewModel: WatchListViewModel by activityViewModels()
+
     private lateinit var growwShortName: String
 
     override fun onCreateView(
@@ -34,6 +39,8 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
+        watchListViewModel.loadData()
+
         _binding = FragmentIpoDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,6 +50,7 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         searchId = args.searchId
         growwShortName = args.growwShortName
+        liked = args.liked
 
         detailsViewModel.loadData(searchId = searchId, growwShortName = growwShortName)
         detailsViewModel.detailsIPOs.observe(viewLifecycleOwner) { myResponse ->
@@ -60,6 +68,76 @@ class DetailsFragment : Fragment() {
                             handleRetry()
                         } else {
                             myResponse.data.let {
+                                if (watchListViewModel.getAllSymbolCompanyWishlist.isNotEmpty()) {
+
+                                    for (i in watchListViewModel.getAllSymbolCompanyWishlist.indices) {
+//                                        Log.d(IPO_LOG_TAG, "kon bola + ${watchListViewModel.getAllSymbolCompanyWishlist[i]}")
+                                        if (myResponse.data?.symbol == watchListViewModel.getAllSymbolCompanyWishlist[i]
+                                        ) {
+//                                            Log.d(IPO_LOG_TAG, "kon bola bc")
+                                            liked = true
+                                            break
+                                        } else {
+                                            liked = false
+                                        }
+                                    }
+                                } else {
+                                    liked = false
+                                }
+
+                                if ((it.status != "LISTED" || liked)) {
+                                    binding.wishlistHeart.visibility = View.VISIBLE
+                                    if (liked) {
+                                        binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(
+                                            requireContext(),
+                                            R.drawable.ic_watch_list))
+                                    } else {
+                                        binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(
+                                            requireContext(),
+                                            R.drawable.ic_heart))
+                                    }
+                                    binding.wishlistHeart.setOnClickListener { _ ->
+                                        liked = !liked
+                                        var gainPrice: String = ""
+                                        if (!it.listing.listingPrice.isNullOrBlank() && !it.issuePrice.isNullOrBlank()) {
+                                            gainPrice =
+                                                (it.listing.listingPrice?.toDouble() - it.issuePrice?.toDouble()).toString()
+                                        }
+
+                                        val mCompany = Company(biddingStartDate = it.startDate,
+                                            growwShortName = it.companyShortName,
+                                            issueSize = it.issueSize,
+                                            listingDate = it.listingDate,
+                                            logoUrl = it.logoUrl,
+                                            maxPrice = it.maxPrice,
+                                            minBidQuantity = it.minBidQuantity,
+                                            minPrice = it.minPrice,
+                                            searchId = searchId,
+                                            status = it.status,
+                                            liked = liked,
+                                            additionalTxt = null,
+                                            retailSubscriptionRate = null,
+                                            issuePrice = it.issuePrice,
+                                            listingGains = gainPrice,
+                                            listingPrice = it.listing.listingPrice,
+                                            symbol = it.symbol
+                                        )
+                                        if (liked) {
+                                            addWatchlistCompany(mCompany)
+                                        } else {
+                                            deleteWatchlistCompany(mCompany.symbol.toString())
+                                        }
+                                        if (liked) {
+                                            binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ic_watch_list))
+                                        } else {
+                                            binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ic_heart))
+                                        }
+                                    }
+                                }
 
 
                                 if (!it.companyShortName.isNullOrBlank()) {
@@ -267,6 +345,19 @@ class DetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun deleteWatchlistCompany(deleteSymbol: String) {
+        watchListViewModel.deleteCompanyWishlistBySymbol(deleteSymbol)
+    }
+
+    private fun addWatchlistCompany(add: Company) {
+        watchListViewModel.insertWatchlistCompanyLocal(CompanyLocalModel(0,
+            System.currentTimeMillis() / 1000,
+            growwShortName = add.growwShortName.toString(),
+            SYMBOL = add.symbol.toString(),
+            add))
+
     }
 
     private fun subscriptionHelper(value: String): String {

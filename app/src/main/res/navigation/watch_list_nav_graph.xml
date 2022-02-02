@@ -25,5 +25,8 @@
         <argument
             android:name="searchId"
             app:argType="string" />
+        <argument
+            android:name="liked"
+            app:argType="boolean" />
     </fragment>
 </navigation>

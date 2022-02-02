@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.Company
 import com.lasteyestudios.ipoalerts.databinding.IpoMainItemBinding
 import com.lasteyestudios.ipoalerts.tabs.current.BlockRecyclerAdapter.BlockAdapterViewHolder
+import com.lasteyestudios.ipoalerts.utils.CURRENT_FRAGMENT_HORIZONTAL
 
 class BlockRecyclerAdapter(
     private val context:Context,
-    private val onItemClicked: (searchId: String, growwShortName: String) -> Unit,
+    private val onItemClicked: (searchId: String, growwShortName: String, liked:Boolean) -> Unit,
     private val onBlockClicked: (ipoCategory: String) -> Unit,
-    private val deleteWatchlistCompany: (growwShortName: String) -> Unit,
+    private val deleteWatchlistCompany: (deleteSymbol: String) -> Unit,
     private val addWatchlistCompany: (company: Company) -> Unit,
 ) :
     ListAdapter<List<Company?>, BlockAdapterViewHolder>(HomeAdapterDiffCallback) {
@@ -48,13 +49,13 @@ class BlockRecyclerAdapter(
 
     inner class BlockAdapterViewHolder(private val binding: IpoMainItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val myAdapter = ItemRecyclerAdapter(context,  {searchId, growwShortName->
-            onItemClicked(searchId, growwShortName)
-        },{deleteGrowwShortName->
-            deleteWatchlistCompany(deleteGrowwShortName)
+        private val myAdapter = ItemRecyclerAdapter(context,  {searchId, growwShortName , liked->
+            onItemClicked(searchId, growwShortName, liked)
+        },{deleteSymbol->
+            deleteWatchlistCompany(deleteSymbol)
         },{add->
             addWatchlistCompany(add)
-        })
+        }, CURRENT_FRAGMENT_HORIZONTAL)
 
         fun bind(item: List<Company?>, position: Int) {
 

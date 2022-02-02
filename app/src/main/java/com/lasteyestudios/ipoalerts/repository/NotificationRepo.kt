@@ -43,8 +43,8 @@ class NotificationRepo {
     suspend fun getIPOCompanyListingsForNotifications() {
         Log.d(IPO_LOG_TAG, "getIPOCompanyListingsForNotifications start")
 
-        val getAllGrowShortCompanyWishlist: List<String> =
-            localDbRepository.getAllGrowShortCompanyWishlist()
+        val getAllSymbolCompanyWishlist: List<String> =
+            localDbRepository.getAllSymbolCompanyWishlist()
         networkRepository.getIPOCompanyListings().catch { exception ->
             Log.d(IPO_LOG_TAG,
                 "error received in GetUpdatesWorker" + exception.stackTraceToString())
@@ -56,13 +56,13 @@ class NotificationRepo {
                     for (j in myResponse.data.indices) {
                         if (myResponse.data?.get(j) != null) {
                             for (k in myResponse.data?.get(j)?.indices!!) {
-                                for (i in getAllGrowShortCompanyWishlist.indices) {
+                                for (i in getAllSymbolCompanyWishlist.indices) {
                                     if (myResponse.data?.get(j)
-                                            ?.get(k)?.growwShortName == getAllGrowShortCompanyWishlist[i]
+                                            ?.get(k)?.symbol == getAllSymbolCompanyWishlist[i]
                                     ) {
                                         var myLocalCompany =
                                             getCompanyLocalFromGrowwShortName(
-                                                getAllGrowShortCompanyWishlist[i]).company
+                                                getAllSymbolCompanyWishlist[i]).company
 
                                         //testing
 //                                        myLocalCompany = Company(biddingStartDate = null,growwShortName = null,issueSize = null,listingDate = null,logoUrl = null,maxPrice = null,minBidQuantity = null,minPrice = null,searchId = null, status = null, liked = false,additionalTxt = null,retailSubscriptionRate = null,issuePrice = null,listingGains = null,listingPrice = null)
@@ -96,13 +96,14 @@ class NotificationRepo {
                                         Log.d(IPO_LOG_TAG, "curr -> $curr")
                                         curr.let { new.add(it) }
 
-                                        localDbRepository.deleteCompanyWishlistByGrowwShortName(
+                                        localDbRepository.deleteCompanyWishlistBySymbol(
                                             myLocalCompany.growwShortName.toString())
                                         updatedCompany.liked = true
                                         localDbRepository.insertCompanyWishlist(
                                             CompanyLocalModel(0,
                                                 System.currentTimeMillis() / 1000,
                                                 updatedCompany.growwShortName!!,
+                                                updatedCompany.symbol.toString(),
                                                 updatedCompany))
                                         Log.d(IPO_LOG_TAG,
                                             "updatedCompany ->$updatedCompany and myLocalCompany ->$myLocalCompany")

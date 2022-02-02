@@ -43,32 +43,52 @@
             <TextView
                 android:id="@+id/company_name"
                 android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:layout_marginTop="50dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="35dp"
                 android:ellipsize="end"
-                android:gravity="center|bottom"
-                android:maxWidth="210dp"
-                android:maxLines="2"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:maxWidth="160dp"
+                android:maxLines="3"
                 android:text="@string/no_data_available"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/logo_image_card"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/wishlist_heart"
+                tools:text="ags " />
+
+            <ImageButton
+                android:id="@+id/wishlist_heart"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/transparent"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/company_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/company_name"
+                app:layout_constraintTop_toTopOf="@id/company_name"
+                tools:src="@drawable/ic_heart"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/company_official_name"
                 android:layout_width="wrap_content"
                 android:layout_height="036dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="5dp"
                 android:ellipsize="end"
                 android:gravity="center|top"
                 android:maxWidth="190dp"
                 android:maxLines="2"
                 android:text="@string/no_data_available"
                 android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/logo_image_card"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/logo_image_card"
                 app:layout_constraintTop_toBottomOf="@id/company_name" />
 
 

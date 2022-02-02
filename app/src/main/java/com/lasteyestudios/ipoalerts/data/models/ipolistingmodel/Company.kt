@@ -17,8 +17,8 @@ data class Company(
     val issuePrice: String?,
     val listingGains: String?,
     val listingPrice: String?,
+    val symbol: String?,
 )
-
 //    val biddingEndDate: String?,
 //    val documentUrl: String?,
 //    val lotSize: String?,

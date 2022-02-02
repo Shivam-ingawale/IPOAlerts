@@ -28,6 +28,9 @@
         <argument
             android:name="growwShortName"
             app:argType="string" />
+        <argument
+            android:name="liked"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/ipoCategory"

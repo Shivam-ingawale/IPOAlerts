@@ -14,8 +14,8 @@ interface CompanyWishlistDao {
     fun getAllCompanyWishlist() : LiveData<List<CompanyLocalModel>>
 
 
-    @Query("SELECT growwShortName FROM company_wishlist_table ORDER BY timeStamp DESC")
-    fun getAllGrowShortCompanyWishlist() : List<String>
+    @Query("SELECT Symbol FROM company_wishlist_table ORDER BY timeStamp DESC")
+    fun getAllSymbolCompanyWishlist() : List<String>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertCompanyWishlist(companyLocalModel: CompanyLocalModel)
@@ -28,6 +28,6 @@ interface CompanyWishlistDao {
 //    @Query("UPDATE company_wishlist_table SET company =:company WHERE growwShortName=:growwShortName")
 //    fun updateCompanyWishlist(growwShortName: String, company: Company)
 
-    @Query("DELETE FROM company_wishlist_table WHERE growwShortName = :growwShortName")
-    fun deleteCompanyWishlistByGrowwShortName(growwShortName: String)
+    @Query("DELETE FROM company_wishlist_table WHERE symbol = :Symbol")
+    fun deleteCompanyWishlistBySymbol(Symbol: String)
 }

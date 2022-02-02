@@ -147,7 +147,8 @@ class Transformer {
                     retailSubscriptionRate = objToString(jsonElementCompany?.get("retailSubscriptionRate")),
                     status = objToString(jsonElementCompany?.get("status")),
 //                    symbol = objToString(jsonElementCompany?.get("symbol")),
-                    liked = false
+                    liked = false,
+                    symbol = objToString(jsonElementCompany?.get("symbol")),
                 )
                 if (company.searchId != "") {
                     list2.add(company)

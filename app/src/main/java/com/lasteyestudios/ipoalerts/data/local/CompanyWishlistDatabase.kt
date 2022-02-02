@@ -7,7 +7,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.lasteyestudios.ipoalerts.data.local.model.CompanyLocalModel
 
-@Database(entities = [CompanyLocalModel::class], version = 1, exportSchema = false)
+
+
+
+@Database(entities = [CompanyLocalModel::class], version = 3, exportSchema = false)
 
 abstract class CompanyWishlistDatabase : RoomDatabase() {
 
@@ -26,14 +29,18 @@ abstract class CompanyWishlistDatabase : RoomDatabase() {
             if (tempInstance != null) {
                 return tempInstance
             }
+
             // Synchronised means once a thread calls this block {acquires a lock}, no other thread
             // can access it before the first one releases the lock
             synchronized(this) {
+                // FIXME -> DO NOT FORGET TO PROVIDE MIGRATIONS FOR EACH CHANGE IN THE SCHEMA.
+                //  THE DB IS NOT GOING TO THROW AN EXCEPTION BUT WILL DROP ALL TABLES.
+                //  REMOVE THIS COMMENT ONLY IF THIS BEHAVIOUR IS CHANGED.
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CompanyWishlistDatabase::class.java,
                     "company_wishlist_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

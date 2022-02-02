@@ -25,7 +25,7 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
     val getAllCompanyWishlist: LiveData<List<CompanyLocalModel>>
     private var mDownloadsList: MutableList<CompanyLocalModel> = mutableListOf()
 
-    var getAllGrowShortCompanyWishlist: List<String> = emptyList()
+    var getAllSymbolCompanyWishlist: List<String> = emptyList()
 
     init {
         val companyWishlistDao: CompanyWishlistDao =
@@ -34,7 +34,7 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
         getAllCompanyWishlist = localDbRepository.getAllCompanyWishlist()
 
         viewModelScope.launch(Dispatchers.IO) {
-            getAllGrowShortCompanyWishlist = localDbRepository.getAllGrowShortCompanyWishlist()
+            getAllSymbolCompanyWishlist = localDbRepository.getAllSymbolCompanyWishlist()
         }
     }
     fun getLocalDbRepository(): LocalDbRepository {
@@ -64,16 +64,16 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
 //        }
 //    }
 
-    fun deleteCompanyWishlistByGrowwShortName(growwShortName: String) {
+    fun deleteCompanyWishlistBySymbol(Symbol: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            localDbRepository.deleteCompanyWishlistByGrowwShortName(growwShortName)
+            localDbRepository.deleteCompanyWishlistBySymbol(Symbol)
         }
     }
 
 
     fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
-            getAllGrowShortCompanyWishlist = localDbRepository.getAllGrowShortCompanyWishlist()
+            getAllSymbolCompanyWishlist = localDbRepository.getAllSymbolCompanyWishlist()
         }
 //                _currentIPOs.postValue()
     }

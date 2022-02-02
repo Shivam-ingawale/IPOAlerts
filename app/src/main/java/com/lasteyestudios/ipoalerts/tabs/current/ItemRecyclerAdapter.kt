@@ -14,12 +14,14 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.lasteyestudios.ipoalerts.R
 import com.lasteyestudios.ipoalerts.data.models.ipolistingmodel.Company
 import com.lasteyestudios.ipoalerts.databinding.IpoCompanyItemBinding
+import com.lasteyestudios.ipoalerts.utils.CURRENT_FRAGMENT_HORIZONTAL
 
 class ItemRecyclerAdapter(
     private val context: Context,
-    private val onItemClicked: (searchId: String, growwShortName: String) -> Unit,
-    private val deleteWatchlistCompany: (growwShortName: String) -> Unit,
+    private val onItemClicked: (searchId: String, growwShortName: String, liked:Boolean) -> Unit,
+    private val deleteWatchlistCompany: (deleteSymbol: String) -> Unit,
     private val addWatchlistCompany: (company: Company) -> Unit,
+    private val from: String?,
 ) :
     ListAdapter<Company?, ItemRecyclerAdapter.ItemAdapterViewHolder>(HomeAdapterDiffCallback) {
 
@@ -86,11 +88,15 @@ class ItemRecyclerAdapter(
     inner class ItemAdapterViewHolder(private val binding: IpoCompanyItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Company?) {
-            val totalWidth: Int = Resources.getSystem().displayMetrics.widthPixels
-            val itemWidth = (totalWidth * 0.84) / 2
-            val itemHeight = (itemWidth * 16.0) / 9
-            val x = (itemHeight).toInt()
+
+            if (from == CURRENT_FRAGMENT_HORIZONTAL) {
+                val totalWidth: Int = Resources.getSystem().displayMetrics.widthPixels
+                val itemWidth = (totalWidth * 0.90) / 2
+                val itemHeight = (itemWidth * 16.0) / 9
+                val x = (itemHeight).toInt()
 //                binding.root.layoutParams.height = x
+                binding.root.layoutParams.width = itemWidth.toInt()
+            }
 
             item?.let {
                 if ((it.status != "LISTED" || it.liked)) {
@@ -107,7 +113,7 @@ class ItemRecyclerAdapter(
                         if (it.liked) {
                             addWatchlistCompany(item)
                         } else {
-                            deleteWatchlistCompany(item.growwShortName.toString())
+                            deleteWatchlistCompany(item.symbol.toString())
                         }
                         if (it.liked) {
                             binding.wishlistHeart.setImageDrawable(ContextCompat.getDrawable(context,
@@ -156,7 +162,8 @@ class ItemRecyclerAdapter(
 
                 binding.ipoCard.setOnClickListener { _ ->
                     if (it.searchId != null && it.growwShortName != null) {
-                        onItemClicked(it.searchId.toString(), it.growwShortName.toString())
+                        onItemClicked(it.searchId.toString(), it.growwShortName.toString(),
+                        it.liked)
                     }
                 }
                 Glide.with(binding.logoImage.context).load(it.logoUrl).centerCrop().transition(

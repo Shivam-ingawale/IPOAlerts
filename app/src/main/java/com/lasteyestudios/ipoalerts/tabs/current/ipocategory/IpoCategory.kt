@@ -15,6 +15,7 @@ import com.lasteyestudios.ipoalerts.databinding.FragmentIpoCategoryBinding
 import com.lasteyestudios.ipoalerts.tabs.common.SharedViewModel
 import com.lasteyestudios.ipoalerts.tabs.current.ItemRecyclerAdapter
 import com.lasteyestudios.ipoalerts.tabs.watchlist.WatchListViewModel
+import com.lasteyestudios.ipoalerts.utils.CURRENT_FRAGMENT_CATEGORY
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
 
 
@@ -57,18 +58,19 @@ class IpoCategory : Fragment() {
 //                        mCompantListing?.CLOSED)
 
 
-        itemRecyclerAdapter = ItemRecyclerAdapter(requireContext(), { searchId, growwShortName ->
+        itemRecyclerAdapter = ItemRecyclerAdapter(requireContext(), { searchId, growwShortName, liked ->
             findNavController().navigate(IpoCategoryDirections.actionIpoCategoryToDetailsFragment2(
                 growwShortName = growwShortName,
-                searchId = searchId))
-        }, { deleteGrowwShortName ->
-            watchListViewModel.deleteCompanyWishlistByGrowwShortName(deleteGrowwShortName)
+                searchId = searchId, liked = liked))
+        }, { deleteSymbol ->
+            watchListViewModel.deleteCompanyWishlistBySymbol(deleteSymbol)
         }, { add ->
             watchListViewModel.insertWatchlistCompanyLocal(CompanyLocalModel(0,
                 0,
                 add.growwShortName.toString(),
+                add.symbol.toString(),
                 add))
-        })
+        }, CURRENT_FRAGMENT_CATEGORY)
 
         binding.categoryText.text = ipoCategory
 
@@ -89,15 +91,20 @@ class IpoCategory : Fragment() {
                     for (j in myResponse.data.indices) {
                         if (myResponse.data?.get(j) != null) {
                             for (k in myResponse.data?.get(j)?.indices!!) {
-                                for (i in watchListViewModel.getAllGrowShortCompanyWishlist.indices) {
-                                    if (myResponse.data?.get(j)
-                                            ?.get(k)?.growwShortName == watchListViewModel.getAllGrowShortCompanyWishlist[i]
-                                    ) {
-                                        myResponse.data?.get(j)?.get(k)?.liked = true
-                                        break
-                                    } else {
-                                        myResponse.data?.get(j)?.get(k)?.liked = false
+                                if(watchListViewModel.getAllSymbolCompanyWishlist.isNotEmpty()) {
+
+                                    for (i in watchListViewModel.getAllSymbolCompanyWishlist.indices) {
+                                        if (myResponse.data?.get(j)
+                                                ?.get(k)?.symbol == watchListViewModel.getAllSymbolCompanyWishlist[i]
+                                        ) {
+                                            myResponse.data?.get(j)?.get(k)?.liked = true
+                                            break
+                                        } else {
+                                            myResponse.data?.get(j)?.get(k)?.liked = false
+                                        }
                                     }
+                                }else{
+                                    myResponse.data?.get(j)?.get(k)?.liked = false
                                 }
                             }
                         }

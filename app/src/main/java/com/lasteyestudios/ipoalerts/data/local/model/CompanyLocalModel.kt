@@ -14,6 +14,8 @@ data class CompanyLocalModel(
     var timeStamp: Long?,
     @ColumnInfo(name = "ShortName")
     var growwShortName:String,
+    @ColumnInfo(name = "SYMBOLS")
+    var SYMBOL:String,
     @Embedded
     val company: Company
 ) : RecyclerItem

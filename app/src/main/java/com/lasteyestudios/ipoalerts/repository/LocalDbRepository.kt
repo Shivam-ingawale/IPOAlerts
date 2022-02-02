@@ -10,8 +10,8 @@ class LocalDbRepository(private val companyWishlistDao: CompanyWishlistDao) {
         companyWishlistDao.getAllCompanyWishlist()
 
 
-    fun getAllGrowShortCompanyWishlist() : List<String> =
-        companyWishlistDao.getAllGrowShortCompanyWishlist()
+    fun getAllSymbolCompanyWishlist() : List<String> =
+        companyWishlistDao.getAllSymbolCompanyWishlist()
 
     fun getCompanyLocalFromGrowwShortName(growwShortName: String) : CompanyLocalModel =
         companyWishlistDao.getCompanyLocalFromGrowwShortName(growwShortName)
@@ -22,6 +22,6 @@ class LocalDbRepository(private val companyWishlistDao: CompanyWishlistDao) {
 //    fun updateMediaDownload(growwShortName: String, company: Company) =
 //        companyWishlistDao.updateMediaDownloadStatus(mediaId, status)
 
-    fun deleteCompanyWishlistByGrowwShortName(growwShortName: String) =
-        companyWishlistDao.deleteCompanyWishlistByGrowwShortName(growwShortName)
+    fun deleteCompanyWishlistBySymbol(symbol: String) =
+        companyWishlistDao.deleteCompanyWishlistBySymbol(symbol)
 }
