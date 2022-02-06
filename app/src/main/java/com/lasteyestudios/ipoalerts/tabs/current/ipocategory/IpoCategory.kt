@@ -82,7 +82,6 @@ class IpoCategory : Fragment() {
                 }
                 Response.Loading -> {
 
-//                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Response.Success -> {
                     binding.retryFab.visibility = View.INVISIBLE
@@ -132,6 +131,5 @@ class IpoCategory : Fragment() {
                 sharedViewModel.loadHomeIPOData()
             }
         }
-//        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 }

@@ -17,16 +17,12 @@ import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.lasteyestudios.ipoalerts.R
 import com.lasteyestudios.ipoalerts.data.models.Response.*
 import com.lasteyestudios.ipoalerts.databinding.FragmentSearchAllotmentBinding
-import com.lasteyestudios.ipoalerts.utils.BETTER_LUCK_NEXT_TIME
-import com.lasteyestudios.ipoalerts.utils.HAPPY_GIF
 import com.lasteyestudios.ipoalerts.utils.IPO_LOG_TAG
-import com.lasteyestudios.ipoalerts.utils.SAD_GIF
 
 
 class SearchAllotmentFragment : Fragment() {
@@ -58,8 +54,7 @@ class SearchAllotmentFragment : Fragment() {
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val radio: RadioButton = binding.root.findViewById(checkedId)
-//            Toast.makeText(context, " On checked change :" + " ${radio.text}", Toast.LENGTH_SHORT)
-//                .show()
+
             when {
 
                 radio.text.toString() == "PAN Card Number" -> {
@@ -77,7 +72,7 @@ class SearchAllotmentFragment : Fragment() {
             letsGo(binding.editText.text.toString(), binding.editTextLayout)
         }
 
-        searchAllotmentViewModel.searchAllotmentIPOs.observe(viewLifecycleOwner, { myResponse ->
+        searchAllotmentViewModel.searchAllotmentIPOs.observe(viewLifecycleOwner) { myResponse ->
             if (myResponse != null) {
                 when (myResponse) {
                     Error -> {
@@ -85,7 +80,6 @@ class SearchAllotmentFragment : Fragment() {
                     }
                     Loading -> {
 //                    binding.retryAllotmentFab.visibility = View.INVISIBLE
-//                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                     }
                     is Success -> {
                         Log.d(IPO_LOG_TAG, "live data" + (myResponse.data == null))
@@ -117,22 +111,22 @@ class SearchAllotmentFragment : Fragment() {
                                 binding.appliedFor.text = it.AMTADJ
                                 binding.cutoffPrice.text = it.higher_priceband
                                 if (it.ALLOT?.toInt() ?: 0 > 0) {
-                                    Glide.with(binding.allotmentMeme.context).load(HAPPY_GIF)
-                                        .fitCenter()
-                                        .into(binding.allotmentMeme)
+
+                                    binding.allotmentMeme.setAnimation("happy_duck.json")
+                                    binding.allotmentMeme.playAnimation()
                                     googleReview()
                                 } else {
-                                    Glide.with(binding.allotmentMeme.context)
-                                        .load(BETTER_LUCK_NEXT_TIME)
-                                        .fitCenter()
-                                        .into(binding.allotmentMeme)
+
+                                    binding.allotmentMeme.setAnimation("worried.json")
+                                    binding.allotmentMeme.playAnimation()
+
                                 }
                             }
                         }
                     }
                 }
             }
-        })
+        }
         binding.totalScreen.setOnClickListener {
             Log.d(IPO_LOG_TAG, "totalScreen clicked")
             searchAllotmentViewModel.clearData()
@@ -189,7 +183,6 @@ class SearchAllotmentFragment : Fragment() {
         }
         if (!text.isNullOrEmpty()) {
             if (keyWord != null) {
-//                Toast.makeText(context, "On button click : $keyWord", Toast.LENGTH_SHORT).show()
                 searchAllotmentViewModel.loadAllotmentIPOData(companyId = companyId,
                     userDoc = text.toString(),
                     keyWord = keyWord!!)
@@ -212,7 +205,6 @@ class SearchAllotmentFragment : Fragment() {
                     keyWord = keyWord!!)
             }
         }
-//        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -234,9 +226,9 @@ class SearchAllotmentFragment : Fragment() {
 
         hideKeyboard()
         binding.totalScreen.visibility = View.VISIBLE
-        Glide.with(binding.allotmentMeme.context).load(SAD_GIF)
-            .centerCrop()
-            .into(binding.allotmentMeme)
+
+        binding.allotmentMeme.setAnimation("lonely_404.json")
+        binding.allotmentMeme.playAnimation()
         binding.noRecordsFound.visibility = View.VISIBLE
 
     }

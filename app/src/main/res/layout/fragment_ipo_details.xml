@@ -7,6 +7,24 @@
     android:fitsSystemWindows="true"
     tools:context=".tabs.details.DetailsFragment">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loading_animation_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:cardElevation="5dp">
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="loading_banking.json"
+            app:lottie_loop="true" />
+    </androidx.cardview.widget.CardView>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -53,9 +71,9 @@
                 android:text="@string/no_data_available"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/wishlist_heart"
                 app:layout_constraintStart_toEndOf="@+id/logo_image_card"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/wishlist_heart"
                 tools:text="ags " />
 
             <ImageButton
@@ -79,16 +97,16 @@
                 android:id="@+id/company_official_name"
                 android:layout_width="wrap_content"
                 android:layout_height="036dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
                 android:ellipsize="end"
                 android:gravity="center|top"
                 android:maxWidth="190dp"
                 android:maxLines="2"
                 android:text="@string/no_data_available"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@id/logo_image_card"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/logo_image_card"
                 app:layout_constraintTop_toBottomOf="@id/company_name" />
 
 

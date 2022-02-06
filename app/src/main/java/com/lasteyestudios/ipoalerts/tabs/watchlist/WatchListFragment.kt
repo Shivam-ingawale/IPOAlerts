@@ -59,8 +59,10 @@ class WatchListFragment : Fragment() {
         watchListViewModel.getAllCompanyWishlist.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
                 binding.watchlistEmptyText.visibility = View.VISIBLE
+                binding.watchlistAnimationView.visibility = View.VISIBLE
             } else {
-                binding.watchlistEmptyText.visibility = View.INVISIBLE
+                binding.watchlistEmptyText.visibility = View.GONE
+                binding.watchlistAnimationView.visibility = View.GONE
             }
             itemRecyclerAdapter.submitList(watchListViewModel.getListCompanyFromCompanyLocal(it))
         }

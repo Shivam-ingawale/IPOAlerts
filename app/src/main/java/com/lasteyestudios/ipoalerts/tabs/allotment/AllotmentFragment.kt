@@ -47,14 +47,21 @@ class AllotmentFragment : Fragment() {
             when (myResponse) {
                 Response.Error -> {
                     handleRetry()
+                    binding.allotmentAnimationView.visibility = View.VISIBLE
+                    binding.allotmentEmptyText.visibility = View.VISIBLE
                 }
                 Response.Loading -> {
                     binding.retryAllotmentFab.visibility = View.INVISIBLE
-//                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Response.Success -> {
-
-                    mAdapter.submitList(myResponse.data)
+                    if(myResponse.data.isNullOrEmpty()){
+                        binding.allotmentAnimationView.visibility = View.VISIBLE
+                        binding.allotmentEmptyText.visibility = View.VISIBLE
+                    }else{
+                        binding.allotmentAnimationView.visibility = View.GONE
+                        binding.allotmentEmptyText.visibility = View.GONE
+                        mAdapter.submitList(myResponse.data)
+                    }
                 }
             }
         }
@@ -69,12 +76,12 @@ class AllotmentFragment : Fragment() {
                 allotmentViewModel.loadAllotmentIPOData()
             }
         }
-//        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.allotmentRecyclerView.adapter = null
         _binding = null
     }
 }

@@ -177,8 +177,8 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
+        app:cardBackgroundColor="@color/grey"
         android:visibility="gone"
-        app:cardBackgroundColor="@color/transparent"
         app:cardElevation="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -217,13 +217,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/allotment_meme"
                         android:layout_width="match_parent"
                         android:layout_height="240dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_fileName="happy_duck.json"
+                        app:lottie_loop="true" />
+
 
                     <TextView
                         android:id="@+id/name_text"

@@ -42,12 +42,44 @@
         android:elevation="3dp"
         android:focusable="true"
         android:text="@string/retry"
+        android:visibility="gone"
         app:icon="@drawable/ic_reload"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/allotment_empty_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:maxLines="3"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/no_allotment_status_available_at_this_moment"
+        android:textSize="18sp"
+        android:textStyle="bold"
+
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/retry_allotment_fab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/allotment_animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        android:visibility="invisible"
+        app:lottie_fileName="growth_chart.json"
+        app:lottie_loop="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

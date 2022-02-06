@@ -61,4 +61,5 @@
     <string name="listing_price">Listing Price</string>
     <string name="listing_gains">Listing Gains</string>
     <string name="your_watchlist_is_empty_nplease_like_an_company_to_add_to_your_watchlist">Your WatchList is Empty \nPlease like an Company to add to your Watchlist</string>
+    <string name="no_allotment_status_available_at_this_moment">No Allotment Status Available at this Moment</string>
 </resources>

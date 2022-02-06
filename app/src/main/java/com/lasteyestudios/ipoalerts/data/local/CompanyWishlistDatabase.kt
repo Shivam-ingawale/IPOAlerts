@@ -10,7 +10,7 @@ import com.lasteyestudios.ipoalerts.data.local.model.CompanyLocalModel
 
 
 
-@Database(entities = [CompanyLocalModel::class], version = 3, exportSchema = false)
+@Database(entities = [CompanyLocalModel::class], version = 2, exportSchema = false)
 
 abstract class CompanyWishlistDatabase : RoomDatabase() {
 

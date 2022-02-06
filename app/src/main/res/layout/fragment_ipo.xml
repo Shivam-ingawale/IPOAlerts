@@ -74,6 +74,28 @@
         tools:itemCount="4"
         tools:listitem="@layout/ipo_main_item" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loading_animation_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:theme="@style/CollapsingToolbarLayoutTheme"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_marginTop="-120dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="loading_banking.json"
+            app:lottie_loop="true" />
+    </androidx.cardview.widget.CardView>
+
     <Button
         android:id="@+id/retry_fab"
         android:layout_width="wrap_content"

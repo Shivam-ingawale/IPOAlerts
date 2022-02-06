@@ -53,6 +53,10 @@ class DetailsFragment : Fragment() {
         liked = args.liked
 
         detailsViewModel.loadData(searchId = searchId, growwShortName = growwShortName)
+
+        binding.loadingAnimationCard.visibility = View.VISIBLE
+
+
         detailsViewModel.detailsIPOs.observe(viewLifecycleOwner) { myResponse ->
             if (myResponse != null) {
                 when (myResponse) {
@@ -61,9 +65,12 @@ class DetailsFragment : Fragment() {
                     }
                     Response.Loading -> {
                         binding.retryAllotmentFab.visibility = View.INVISIBLE
-//                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                     }
                     is Response.Success -> {
+
+                        binding.loadingAnimationCard.visibility = View.GONE
+                        binding.wishlistHeart.visibility = View.INVISIBLE
+
                         if (myResponse.data?.growwShortName == null) {
                             handleRetry()
                         } else {
@@ -429,7 +436,6 @@ class DetailsFragment : Fragment() {
                 detailsViewModel.loadData(searchId = searchId, growwShortName = growwShortName)
             }
         }
-//        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 
 

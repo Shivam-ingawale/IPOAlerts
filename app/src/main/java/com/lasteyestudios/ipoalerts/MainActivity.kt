@@ -2,7 +2,6 @@ package com.lasteyestudios.ipoalerts
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -55,20 +54,11 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
         currentNavController = navHostFragment.navController
         binding.bottomNavView.setupWithNavController(currentNavController)
-
-        networkStatus = NetworkStatus(this).apply {
-            if (!getCurrentNetworkStatus()) {
-                Toast.makeText(applicationContext, "No network connection!", Toast.LENGTH_LONG)
-                    .show()
-            }
-        }
 //        periodicWork()
         Log.d(IPO_LOG_TAG, "in main activity")
 
 
     }
-
-
 
 
     override fun onDestroy() {

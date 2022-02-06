@@ -81,17 +81,19 @@ class CurrentFragment : Fragment() {
                 add.symbol.toString(),
                 add))
         })
-
+        binding.loadingAnimationCard.visibility =View.VISIBLE
         sharedViewModel.currentIPOs.observe(viewLifecycleOwner) { myResponse ->
             when (myResponse) {
                 Response.Error -> {
                     handleRetry()
+
                 }
                 Response.Loading -> {
 
-//                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Response.Success -> {
+
+                    binding.loadingAnimationCard.visibility =View.INVISIBLE
                     binding.retryFab.visibility = View.INVISIBLE
 //                    Log.d(IPO_LOG_TAG,
 //                        "watchListViewModel.getAllGrowShortCompanyWishlist()" + watchListViewModel.getAllGrowShortCompanyWishlist)
@@ -128,7 +130,7 @@ class CurrentFragment : Fragment() {
     override fun onDestroyView() {
 
         super.onDestroyView()
-
+        binding.mainRecyclerView.adapter = null
         _binding = null
     }
 
@@ -271,6 +273,5 @@ class CurrentFragment : Fragment() {
                 sharedViewModel.loadHomeIPOData()
             }
         }
-//        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 }
